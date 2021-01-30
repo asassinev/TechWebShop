@@ -78,19 +78,19 @@ export default {
       ],
       catalog: [
         {
-          path: '/desktop',
+          path: '/catalog/desktop',
           title: 'Компьютеры'
         },
         {
-          path: '/notebook',
+          path: '/catalog/notebook',
           title: 'Ноутбуки'
         },
         {
-          path: '/computer-components',
+          path: '/catalog/computer-components',
           title: 'Комплектующие'
         },
         {
-          path: '/smartphone',
+          path: '/catalog/smartphone',
           title: 'Смартфоны'
         }
       ]
