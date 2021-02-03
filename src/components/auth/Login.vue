@@ -1,7 +1,8 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-5 container">
     <form class="form" @submit.prevent="submit">
-      <h1 class="text-center text-primary mt-2 pb-2">Авторизация</h1>
+      <h1 class="text-center text-primary m-0">Авторизация</h1>
+      <hr>
       <div class="form-group" :class="{ 'errors': emailErrors[0]}">
         <input
           @input="$v.email.$touch()"
@@ -24,10 +25,9 @@
           type="password"/>
         <div v-if="passwordErrors[0]" :class="{'pl-2 invalid-feedback': passwordErrors[0]}">{{ passwordErrors[0] }}</div>
       </div>
-      <hr>
       <div class="text-right">
         <button type="button" class="mr-2 btn btn-primary btn-lg" @click="submit">Войти</button>
-        <router-link class="btn btn-secondary btn-lg" to="/profile/registration">Создать аккаунт</router-link>
+        <router-link class="btn btn-secondary btn-lg" to="/registration">Создать аккаунт</router-link>
       </div>
     </form>
   </div>
@@ -77,7 +77,8 @@ export default {
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR'
       } else {
-        console.log('done')
+        this.$store.dispatch('loginUser', 1)
+        this.$router.push('/profile')
         this.submitStatus = 'PENDING'
         setTimeout(() => {
           this.submitStatus = 'OK'

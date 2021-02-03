@@ -12,7 +12,7 @@ import ComputerComponents from '../components/catalog/ComputerComponents'
 import Smartphone from '../components/catalog/Smartphone'
 import Login from '../components/auth/Login'
 import Registration from '../components/auth/Registration'
-import Account from '../components/auth/Account'
+import authGuard from './auth-guard'
 
 Vue.use(VueRouter)
 
@@ -55,20 +55,15 @@ export default new VueRouter({
     {
       path: '/profile',
       component: Profile,
-      children: [
-        {
-          path: 'login',
-          component: Login
-        },
-        {
-          path: 'registration',
-          component: Registration
-        },
-        {
-          path: 'account',
-          component: Account
-        }
-      ]
+      beforeEnter: authGuard
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/registration',
+      component: Registration
     },
     {
       path: '*',

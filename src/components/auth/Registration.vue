@@ -1,7 +1,8 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-5 container">
     <form class="form" @submit.prevent="submit">
-      <h1 class="text-center text-primary mt-2 pb-2">Регистрация</h1>
+      <h1 class="text-center text-primary mt-1 pb-1">Регистрация</h1>
+      <hr>
       <div class="form-group" :class="{ 'errors': emailErrors[0]}">
         <input
           @input="$v.email.$touch()"
@@ -35,7 +36,6 @@
           type="password"/>
         <div v-if="repeatPasswordErrors[0]" :class="{'pl-2 invalid-feedback': repeatPasswordErrors[0]}">{{ repeatPasswordErrors[0] }}</div>
       </div>
-      <hr>
       <div class="text-right">
         <button type="button" class="mr-2 btn btn-primary btn-lg" @click="submit">Создать аккаунт</button>
       </div>
