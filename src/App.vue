@@ -2,7 +2,7 @@
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <router-link class="navbar-brand" to="/">Tech</router-link>
+        <router-link class="navbar-brand text-primary" to="/">TECH</router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,29 +28,6 @@
         </div>
       </div>
     </nav>
-    <!-- <div class="navbar">
-      <div class="container">
-        <router-link class="navbar__title" to="/">Tech</router-link>
-        <div class="row text-center navbar-width">
-          <div class="navbar__item col-3">
-            <div class="dropdown">
-              <p class="dropdown-toggle navbar__link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Каталог
-              </p>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <router-link v-for="(link, id) in catalog" :key="id" class="dropdown-item" :to="link.path">{{ link.title }}</router-link>
-              </div>
-            </div>
-          </div>
-          <div class="navbar__item col-3" v-for="(link, id) in navbar" :key="id">
-            <router-link class="navbar__link" :to="link.path">
-              <i :class="link.iconClass"></i>
-              {{ link.title }}
-              </router-link>
-          </div>
-        </div>
-      </div>
-    </div> -->
     <router-view/>
   </div>
 </template>
