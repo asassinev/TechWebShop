@@ -100,17 +100,10 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+html {
+  height: 100%;
 }
-
 .navbar {
-  // width: 100%;
-  // height: 60px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 
   &-width {

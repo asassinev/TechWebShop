@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1 class="text-left">Catalog</h1>
-    <router-view/>
+    <h1>Профиль</h1>
   </div>
 </template>
