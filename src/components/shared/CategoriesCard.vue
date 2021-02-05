@@ -17,6 +17,7 @@ export default {
 
 <style lang="scss" scoped>
 .item-card {
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,13 +25,13 @@ export default {
   width: 100%;
   height: 255px;
   padding: 20px;
-  box-shadow: 0px 3px 9px rgba(0,0,0,0.2);
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
   margin: 10px 0;
   text-decoration: none !important;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 3px 9px rgba(0,0,0,0.5);
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
   }
   &__img {
     display: flex;

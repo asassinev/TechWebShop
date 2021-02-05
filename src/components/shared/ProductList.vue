@@ -103,13 +103,16 @@ export default {
       color: #2c3e50;
       border-radius: 8px;
       padding: 8px 20px 10px;
-      border: 1px solid #2c3e50;
+      border: 1px solid #6c757d;
       text-decoration: none;
       &:hover {
         color: white;
         background-color: #6092c4;
         border-color: #6092c4;
         text-decoration: none;
+      }
+      &:focus {
+        outline: none;
       }
     }
   }
