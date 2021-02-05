@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <h1 class="text-left">Catalog</h1>
-    <CatalogLists :catalog="catalog"/>
+    <h1 class="text-left">Каталог</h1>
+    <Categories :catalog="catalog"/>
   </div>
 </template>
 
 <script>
-import CatalogLists from './catalog/CatalogLists.vue'
+import Categories from './shared/Categories.vue'
 
 export default {
   computed: {
@@ -18,7 +18,7 @@ export default {
     this.$store.dispatch('getCatalog', this.$route.params.name)
   },
   components: {
-    CatalogLists
+    Categories
   }
 }
 </script>

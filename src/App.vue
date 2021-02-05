@@ -83,8 +83,10 @@ export default {
 </script>
 
 <style lang="scss">
-html {
+html, body {
   height: 100%;
+  color: #333;
+  background-color: #f6f6f6;
 }
 .navbar {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
