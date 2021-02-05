@@ -13,12 +13,12 @@
                 Каталог
               </p>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <router-link v-for="(link, id) in catalog" :key="id" class="dropdown-item" :to="link.path">
+                <a v-for="(link, id) in catalog" :key="id" class="dropdown-item" @click="setRouteParams(link.name)">
                   {{ link.title }}
-                </router-link>
+                </a>
               </div>
             </li>
-            <li class="navbar__item col" v-for="(link, id) in navbar" :key="id">
+            <li class="navbar__item text-center col" v-for="(link, id) in navbar" :key="id">
               <router-link class="navbar__link" :to="link.path">
                 <i :class="link.iconClass"></i>
                 {{ link.title }}
@@ -34,6 +34,12 @@
 
 <script>
 export default {
+  methods: {
+    setRouteParams (nameUrl) {
+      this.$store.commit('setCategories', nameUrl)
+      this.$router.push(`/catalog/${nameUrl}`).catch(() => {})
+    }
+  },
   data () {
     return {
       navbar: [
@@ -55,19 +61,19 @@ export default {
       ],
       catalog: [
         {
-          path: '/catalog/desktop',
+          name: 'desktop',
           title: 'Компьютеры'
         },
         {
-          path: '/catalog/notebook',
+          name: 'notebook',
           title: 'Ноутбуки'
         },
         {
-          path: '/catalog/computer-components',
+          name: 'computer-components',
           title: 'Комплектующие'
         },
         {
-          path: '/catalog/smartphone',
+          name: 'smartphone',
           title: 'Смартфоны'
         }
       ]
@@ -126,6 +132,9 @@ html {
   &-menu {
     top: 168%;
     left: 30%;
+  }
+  &-item {
+    cursor: pointer;
   }
 }
 
