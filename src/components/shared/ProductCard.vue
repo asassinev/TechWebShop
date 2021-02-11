@@ -26,7 +26,7 @@ export default {
         {
           id: '1',
           imgSrc: 'https://c.dns-shop.ru/thumb/st1/fit/200/200/8c66420148c49bcd2e1ecb8a3921dd38/f135306a2c10f6baa4a1d7589ac0ae0bce2eef39b9317b194080127cdb88824d.jpg.webp',
-          link: '/',
+          link: '/product/',
           title: '11.6" Ноутбук Acer TravelMate B1 TMB118-M-C0EA черный',
           description: '[1366x768, TN+film, Intel Celeron N4120, 4 х 1.1 ГГц, RAM 4 ГБ, eMMC 64 ГБ, Intel HD Graphics 600 , Wi-Fi, BT, DOS]',
           price: '2 500 '
@@ -34,7 +34,7 @@ export default {
         {
           id: '2',
           imgSrc: 'https://c.dns-shop.ru/thumb/st1/fit/200/200/8c66420148c49bcd2e1ecb8a3921dd38/f135306a2c10f6baa4a1d7589ac0ae0bce2eef39b9317b194080127cdb88824d.jpg.webp',
-          link: '/',
+          link: '/product/',
           title: '11.6" Ноутбук Acer TravelMate B1 TMB118-M-C0EA черный',
           description: '[1366x768, TN+film, Intel Celeron N4120, 4 х 1.1 ГГц, RAM 4 ГБ, eMMC 64 ГБ, Intel HD Graphics 600 , Wi-Fi, BT, DOS]',
           price: '2 500 '

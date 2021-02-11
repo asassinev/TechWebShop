@@ -9,6 +9,7 @@ import Page404 from '../components/Page404'
 import Login from '../components/auth/Login'
 import Registration from '../components/auth/Registration'
 import ProductList from '../components/shared/ProductList'
+import ProductInfo from '../components/shared/ProductInfo'
 import authGuard from './auth-guard'
 
 Vue.use(VueRouter)
@@ -48,6 +49,10 @@ export default new VueRouter({
     {
       path: '/products/:id',
       component: ProductList
+    },
+    {
+      path: '/product/:id',
+      component: ProductInfo
     },
     {
       path: '*',
