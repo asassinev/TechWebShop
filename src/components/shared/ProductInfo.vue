@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div class="col-4">
-          <div class="list-group wrapper" id="list-tab" role="tablist">
+          <div class="list-group" id="list-tab" role="tablist">
           <router-link v-for="tab in tablist" :key="tab.id" class="list-group-item list-group-item-action" :to="tab.href"><i class="mr-2" :class="tab.icon"></i>{{tab.text}}</router-link>
         </div>
       </div>
