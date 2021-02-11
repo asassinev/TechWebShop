@@ -11,6 +11,9 @@ import Registration from '../components/auth/Registration'
 import ProductList from '../components/shared/ProductList'
 import ProductInfo from '../components/shared/ProductInfo'
 import authGuard from './auth-guard'
+import Description from '../components/shared/ProductInfoCard/Description'
+import Reviews from '../components/shared/ProductInfoCard/Reviews'
+import Characteristics from '../components/shared/ProductInfoCard/Characteristics'
 
 Vue.use(VueRouter)
 
@@ -51,8 +54,22 @@ export default new VueRouter({
       component: ProductList
     },
     {
-      path: '/product/:id',
-      component: ProductInfo
+      path: '/product/:idProduct',
+      component: ProductInfo,
+      children: [
+        {
+          path: 'description',
+          component: Description
+        },
+        {
+          path: 'reviews',
+          component: Reviews
+        },
+        {
+          path: 'characteristics',
+          component: Characteristics
+        }
+      ]
     },
     {
       path: '*',

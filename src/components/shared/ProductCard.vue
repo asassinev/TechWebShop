@@ -4,7 +4,7 @@
       <div class="list__info">
         <img class="list__img" :src="product.imgSrc" :alt="product.title">
         <div class="list__text">
-          <router-link :to='product.link + product.id' class="list__title">{{ product.title }}</router-link>
+          <router-link :to='product.link + product.id + `/description`' class="list__title">{{ product.title }}</router-link>
           <p class="list__description">{{ product.description }}</p>
         </div>
         <div class="list__price">
