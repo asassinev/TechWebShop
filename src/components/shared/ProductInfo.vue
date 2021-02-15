@@ -1,25 +1,30 @@
 <template>
   <div class="container">
-    <h1>Product title</h1>
-    <h3>Product id</h3>
-    <div class="wrapper row">
-      <div class="col-4 text-center">
-        <img src="https://c.dns-shop.ru/thumb/st1/fit/200/200/8c66420148c49bcd2e1ecb8a3921dd38/f135306a2c10f6baa4a1d7589ac0ae0bce2eef39b9317b194080127cdb88824d.jpg.webp" alt="">
-      </div>
-      <div class="col-8">
-        <p>2 500 <i class="list__price-gray fas fa-ruble-sign"></i></p>
-        <button class="btn btn-primary">Купить</button>
-      </div>
+    <div v-if="loading">
+      <Loader/>
     </div>
-    <div class="row">
-      <div class="col-4">
-          <div class="list-group" id="list-tab" role="tablist">
-          <router-link v-for="tab in tablist" :key="tab.id" class="list-group-item list-group-item-action" :to="tab.href"><i class="mr-2" :class="tab.icon"></i>{{tab.text}}</router-link>
+    <div v-else>
+      <h1>{{ productInfo.name }}</h1>
+      <h3>{{ productInfo._id }}</h3>
+      <div class="wrapper row">
+        <div class="col-4 text-center">
+          <img :src="productInfo.imgSrc" :alt="productInfo.name">
+        </div>
+        <div class="col-8">
+          <p>{{productInfo.price}} <i class="list__price-gray fas fa-ruble-sign"></i></p>
+          <button class="btn btn-primary">Купить</button>
         </div>
       </div>
-      <div class="col-8">
-          <div class="tab-content wrapper" id="nav-tabContent">
-            <router-view class="container pt-2"></router-view>
+      <div class="row">
+        <div class="col-4">
+            <div class="list-group">
+            <router-link v-for="tab in tablist" :key="tab.id" class="list-group-item list-group-item-action" :to="tab.href"><i class="mr-2" :class="tab.icon"></i>{{tab.text}}</router-link>
+          </div>
+        </div>
+        <div class="col-8">
+            <div class="tab-content wrapper" id="nav-tabContent">
+              <router-view class="container pt-2" id="routerInfo"></router-view>
+          </div>
         </div>
       </div>
     </div>
@@ -47,6 +52,17 @@ export default {
           icon: 'far fa-star'
         }
       ]
+    }
+  },
+  created () {
+    this.$store.dispatch('fetchProduct', this.$route.params.idProduct)
+  },
+  computed: {
+    productInfo () {
+      return this.$store.getters.getProduct
+    },
+    loading () {
+      return this.$store.getters.getLoading
     }
   }
 }

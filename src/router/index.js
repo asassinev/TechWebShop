@@ -50,7 +50,7 @@ export default new VueRouter({
       component: Registration
     },
     {
-      path: '/products/:id',
+      path: '/productList/:id',
       component: ProductList
     },
     {
@@ -59,14 +59,17 @@ export default new VueRouter({
       children: [
         {
           path: 'description',
+          name: 'description',
           component: Description
         },
         {
           path: 'reviews',
+          name: 'reviews',
           component: Reviews
         },
         {
           path: 'characteristics',
+          name: 'characteristics',
           component: Characteristics
         }
       ]

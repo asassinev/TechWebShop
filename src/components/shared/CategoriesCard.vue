@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/products/' + item.id" class="item-card">
+  <router-link :to="'/productList/' + item.id" class="item-card">
     <div class="item-card__img">
       <img :src="item.src" :alt="item.text" class="item-card__img-margin">
     </div>

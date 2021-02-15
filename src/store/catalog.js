@@ -46,7 +46,7 @@ export default {
         categories: 'notebook',
         items: [
           {
-            id: 'simple-notebook',
+            id: 'notebook',
             text: 'Ноутбуки',
             src: 'https://c.dns-shop.ru/thumb/st1/fit_width/120/120/479eb483cc265cfbe1d352135820d472/0ea2577dde074dc9ca85b3dea61eb326b45a4a48ce741823645155265ee06dc8.jpg'
           }
