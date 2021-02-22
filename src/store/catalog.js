@@ -1,6 +1,6 @@
 export default {
   state: {
-    categories: '',
+    categories: null,
     catalog: [
       {
         categories: 'computer-components',
@@ -11,12 +11,12 @@ export default {
             src: 'https://c.dns-shop.ru/thumb/st1/fit_width/120/120/6679e8924eb1db5eaf6b34303261df07/b70d20da48dfebda15c88f04044237bfa6234fe05d539ff68a61395785620202.jpg'
           },
           {
-            id: 'motherboards',
+            id: 'motherboard',
             text: 'Материнские платы',
             src: 'https://c.dns-shop.ru/thumb/st4/fit_width/120/120/955f0f642e31b8a170f1d7b1e89d558b/114d29cfe20f17933bac65e17c2edf53aeb4d5db5a0d683b5191195099eb437c.jpg'
           },
           {
-            id: 'video-cards',
+            id: 'graphics-card',
             text: 'Видеокарты',
             src: 'https://c.dns-shop.ru/thumb/st1/fit_width/120/120/714a7a573a496f27ff82114df61a4cc5/809d70b81f66d3f730c567c442e3ad98baeef227e15b2413dd3b0ca2c4afeca0.jpg'
           },
