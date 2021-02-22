@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5>Характеристики 11.6" Ноутбук Acer TravelMate B1 TMB118-M-C0EA черный</h5>
+    <h5>Характеристики {{this.$store.getters.getProduct.name}}</h5>
     <table class="w-100 mt-2 mb-2">
       <tbody class="card-characteristic" v-for="characteristic in characteristics" :key="characteristic.id">
         <th class="card-characteristic__title">{{characteristic.title}}</th>
