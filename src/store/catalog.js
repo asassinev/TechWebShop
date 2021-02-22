@@ -39,6 +39,16 @@ export default {
             id: 'system-blocks',
             text: 'Системные блоки',
             src: 'https://c.dns-shop.ru/thumb/st1/fit_width/120/120/6bebf2d2c6c09a45f76f2c198cd96e1e/02070da1bc5629563840873087a89888a6babc36c19f2d9a25870212a02d8988.jpg'
+          },
+          {
+            id: 'Nettops',
+            text: 'Неттопы и компьютеры-флешки',
+            src: 'https://c.dns-shop.ru/thumb/st4/fit_width/120/120/2d23fdc92d0aee2d0808be9c5f4c23c0/af402af6f5faa38f464447bab7abf193aec265466afd553154b59650d69cd537.jpg'
+          },
+          {
+            id: 'Monoblocks',
+            text: 'Моноблоки',
+            src: 'https://c.dns-shop.ru/thumb/st4/fit_width/120/120/2b42a035adeb0be21179757e4a7dca61/b2073d3a463fcc517817e2934cfd2b43f16b972b4e6b6ec6b3d49e57eaab6327.jpg'
           }
         ]
       },
