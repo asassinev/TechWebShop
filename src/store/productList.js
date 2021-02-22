@@ -2,20 +2,15 @@ import axios from 'axios'
 
 export default {
   state: {
-    list: null,
-    categoriesName: ''
+    list: null
   },
   mutations: {
     setList (state, payload) {
       state.list = payload
-    },
-    setCategoriesName (state, payload) {
-      state.categoriesName = payload
     }
   },
   actions: {
     async fetchList ({ commit }, payload) {
-      commit('setCategoriesName', payload)
       commit('setLoading', true)
       await axios({
         method: 'get',
@@ -35,9 +30,6 @@ export default {
   getters: {
     getList (state) {
       return state.list
-    },
-    getCatogeriesName (state) {
-      return state.categoriesName
     }
   }
 }

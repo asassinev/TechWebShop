@@ -55,12 +55,7 @@ export default {
     }
   },
   created () {
-    const id = this.$route.params.idProduct
-    const categories = this.$store.getters.getCatogeriesName
-    const payload = {
-      id, categories
-    }
-    this.$store.dispatch('fetchProduct', payload)
+    this.$store.dispatch('fetchProduct', this.$route.params.idProduct)
   },
   computed: {
     productInfo () {
