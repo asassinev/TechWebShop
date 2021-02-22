@@ -5,7 +5,12 @@
         <Filters/>
       </div>
       <div class="col-8">
-        <ProductCard/>
+        <div v-if="loading">
+          <Loader/>
+        </div>
+        <div v-else>
+          <ProductCard/>
+        </div>
       </div>
     </div>
   </div>
@@ -18,6 +23,11 @@ export default {
   data () {
     return {
       products: null
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters.getLoading
     }
   },
   created () {
