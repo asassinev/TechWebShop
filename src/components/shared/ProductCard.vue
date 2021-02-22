@@ -4,7 +4,7 @@
       <div class="list__info">
         <img class="list__img" :src="product.imgSrc" :alt="product.name">
         <div class="list__text">
-          <router-link @click="openCard(product._id)" :to="'/product/' + product._id + `/description`" class="list__title">{{ product.name }}</router-link>
+          <router-link :to="'/product/' + product._id + `/description`" class="list__title">{{ product.name }}</router-link>
           <p class="list__description">{{ product.titleDescription }}</p>
         </div>
         <div class="list__price">
@@ -33,8 +33,8 @@ export default {
   color: #272727;
   &__item {
     background-color: white;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin-bottom: 12px;
+    padding: 14px;
     border-radius: 8px;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
   }
@@ -42,9 +42,12 @@ export default {
   &__info {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
   }
 
   &__price {
+    text-align: right;
+    min-width: 110px;
     font-size: 24px;
     margin-top: 10px;
     &-gray {
@@ -53,7 +56,7 @@ export default {
   }
 
   &__img {
-    margin-right: 10px;
+    margin-right: 20px;
     max-width: 90px;
     height: fit-content;
   }
@@ -75,10 +78,10 @@ export default {
     &:after {
       content: '';
       position: absolute;
-      left: -100px;
+      left: -110px;
       top: 0;
       width: 90px;
-      height: 90px;
+      height: 100px;
     }
   }
 
