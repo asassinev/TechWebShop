@@ -59,11 +59,7 @@ export default {
       catalog: [
         {
           name: 'desktop',
-          title: 'Компьютеры'
-        },
-        {
-          name: 'notebook',
-          title: 'Ноутбуки'
+          title: 'Компьютеры и ноутбуки'
         },
         {
           name: 'computer-components',

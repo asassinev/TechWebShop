@@ -49,12 +49,7 @@ export default {
             id: 'Monoblocks',
             text: 'Моноблоки',
             src: 'https://c.dns-shop.ru/thumb/st4/fit_width/120/120/2b42a035adeb0be21179757e4a7dca61/b2073d3a463fcc517817e2934cfd2b43f16b972b4e6b6ec6b3d49e57eaab6327.jpg'
-          }
-        ]
-      },
-      {
-        categories: 'notebook',
-        items: [
+          },
           {
             id: 'notebook',
             text: 'Ноутбуки',
