@@ -11,13 +11,14 @@ export default {
   },
   actions: {
     async fetchProduct ({ commit }, payload) {
-      const newUrl = 'http://localhost:8000/productInfo/' + payload
+      const newUrl = 'http://localhost:8000/productInfo/' + payload.id + '/' + payload.categories
       commit('setLoading', true)
       await axios({
         method: 'get',
         url: newUrl
       }).then(response => {
         commit('setProduct', response.data)
+        console.log(response.data)
       }).catch(error => {
         console.log(error)
       })
