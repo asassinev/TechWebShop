@@ -1,5 +1,5 @@
 <template>
-  <div class="list">
+  <!-- <div class="list">
     <div v-for="product in products" :key="product.id" class="list__item">
       <div class="list__info">
         <img class="list__img" :src="product.imgSrc" :alt="product.name">
@@ -16,6 +16,24 @@
       </div>
     </div>
   </div>
+   -->
+  <div>
+    <div class="row g-0 mb-3 position-relative shadow-sm bg-white rounded list" v-for="product in products" :key="product.id">
+      <div class="col-md-2 text-center align-items-center m-auto">
+        <img class="img" :src="product.imgSrc" :alt="product.name">
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <router-link class="card-link text-decoration-none text-dark fw-bold fs-5" :to="'/product/' + product._id + `/description`">{{ product.name }}</router-link>
+          <p class="mt-2 mb-0">{{ product.titleDescription }}</p>
+          <div class="clearfix mt-3">
+            <span class="fs-5 float-start fw-bold">Цена: {{ product.price }} <i class="list__price-gray fas fa-ruble-sign"></i></span>
+            <button class="btn btn-primary float-end">Купить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,8 +47,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.img {
+  max-width: 90px;
+  height: auto;
+}
+.card-link {
+    &:hover {
+      color: #0d6efd!important;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 140px;
+      height: 148px;
+    }
+}
 .list {
   color: #272727;
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
   &__item {
     background-color: white;
     margin-bottom: 12px;

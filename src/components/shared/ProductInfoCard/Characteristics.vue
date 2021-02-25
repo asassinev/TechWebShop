@@ -5,8 +5,8 @@
       <tbody class="card-characteristic" v-for="characteristic in characteristics" :key="characteristic.id">
         <th class="card-characteristic__title">{{characteristic.title}}</th>
         <tr v-for="(item, id) in characteristic.items" :key="id" class="card-characteristic__description">
-          <td class="w-50">{{item.key}}</td>
-          <td>{{item.value}}</td>
+          <td class="w-50 ">{{item.key}}</td>
+          <td class="fst-italic">{{item.value}}</td>
         </tr>
       </tbody>
     </table>

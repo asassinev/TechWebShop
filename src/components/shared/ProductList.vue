@@ -1,16 +1,27 @@
 <template>
-  <div class="container">
-    <div class="row mt-5">
-      <div class="col-4">
+  <div>
+    <div class="mt-3" v-if="loading">
+      <Loader/>
+    </div>
+    <div v-else class="row mt-3">
+      <div class="col-12 col-lg-4 mb-3">
         <Filters/>
       </div>
-      <div class="col-8">
-        <div v-if="loading">
-          <Loader/>
-        </div>
-        <div v-else>
-          <ProductCard/>
-        </div>
+      <div class="col-12 col-lg-8">
+        <ProductCard/>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -20,19 +31,16 @@
 import Filters from './Filters'
 import ProductCard from './ProductCard'
 export default {
-  data () {
-    return {
-      products: null
-    }
-  },
   computed: {
     loading () {
       return this.$store.getters.getLoading
+    },
+    product () {
+      return this.$store.getters.getList
     }
   },
   created () {
     this.$store.dispatch('fetchList', this.$route.params.id)
-    this.products = this.$store.getters.getList
   },
   components: {
     Filters,

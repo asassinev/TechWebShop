@@ -2,11 +2,15 @@ import axios from 'axios'
 
 export default {
   state: {
-    product: null
+    product: null,
+    filters: null
   },
   mutations: {
     setProduct (state, payload) {
       state.product = payload
+    },
+    setFilters (state, payload) {
+      state.filters = payload
     }
   },
   actions: {

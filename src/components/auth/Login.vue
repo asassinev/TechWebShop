@@ -1,36 +1,44 @@
 <template>
-  <div class="mt-5 container">
-    <form class="form" @submit.prevent="submit">
-      <h1 class="text-center text-primary m-0">Авторизация</h1>
+<div class="container">
+  <div class="row justify-content-center">
+    <form class="col-sm-12 col-lg-6 form shadow p-3 bg-white rounded" @submit.prevent="submit">
+      <h1 class="text-center fs-2 text-primary m-0">Авторизация</h1>
       <hr>
-      <div class="form-group" :class="{ 'errors': emailErrors[0]}">
+      <div class="form-floating mb-3" :class="{ 'errors': emailErrors[0]}">
         <input
           @input="$v.email.$touch()"
           @blur="$v.email.$touch()"
           placeholder="Enter e-mail..."
-          class="form-control form-control-lg"
+          class="form-control"
           id="email"
           type="email"
-          v-model="email"/>
+          v-model="email">
+        <label for="floatingInput">Email address</label>
         <div v-if="emailErrors[0]" :class="{'pl-2 invalid-feedback': emailErrors[0]}">{{ emailErrors[0] }}</div>
       </div>
-      <div class="form-group" :class="{ 'errors': passwordErrors[0]}">
+      <div class="form-floating mb-3" :class="{ 'errors': passwordErrors[0]}">
         <input
           @input="$v.password.$touch()"
           @blur="$v.password.$touch()"
-          class="form-control form-control-lg"
+          class="form-control"
           id="password"
           v-model="password"
           placeholder="Enter password..."
-          type="password"/>
+          type="password">
+        <label for="floatingInput">Password</label>
         <div v-if="passwordErrors[0]" :class="{'pl-2 invalid-feedback': passwordErrors[0]}">{{ passwordErrors[0] }}</div>
       </div>
-      <div class="text-right">
-        <button type="button" class="mr-2 btn btn-primary btn-lg" @click="submit">Войти</button>
-        <router-link class="btn btn-secondary btn-lg" to="/registration">Создать аккаунт</router-link>
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <button type="button" class="mb-2 mb-md-0 btn btn-primary btn-lg w-100" @click="submit">Войти</button>
+        </div>
+        <div class="col-sm-12 col-md-6">
+          <router-link class="btn btn-secondary btn-lg w-100" to="/registration">Создать аккаунт</router-link>
+        </div>
       </div>
     </form>
   </div>
+</div>
 </template>
 
 <script>
@@ -90,14 +98,6 @@ export default {
 </script>
 
 <style lang="scss">
-.form {
-  margin: 0 auto;
-  padding: 10px 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  @media (min-width: 768px) {
-    width: 50%;
-  }
-}
 .errors {
   input {
     border-color: red;

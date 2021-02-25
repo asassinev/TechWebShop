@@ -1,9 +1,9 @@
 <template>
-  <router-link :to="'/productList/' + item.id" class="item-card">
+  <router-link :to="'/productList/' + item.id" class="item-card shadow-sm p-3 bg-white rounded user-select-none">
     <div class="item-card__img">
       <img :src="item.src" :alt="item.text" class="item-card__img-margin">
     </div>
-    <p class="item-card__text text-primary">
+    <p class="item-card__text fw-bold fs-5 mb-2">
       {{ item.text }}
     </p>
   </router-link>
@@ -19,19 +19,17 @@ export default {
 .item-card {
   display: flex;
   flex-direction: column;
-  background-color: white;
   height: 255px;
   text-align: center;
   justify-content: space-between;
   margin-bottom: 28px;
-  box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
   text-decoration: none !important;
 
   &:hover {
     cursor: pointer;
-    box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
     p {
-      color: #6092c4 !important;
+      color: #007bff !important;
     }
   }
   &__img {
@@ -50,7 +48,7 @@ export default {
   }
 
   &__text {
-    color: #2c3e50 !important;
+    color: #6c757d;
     margin-bottom: 20px;
   }
 }

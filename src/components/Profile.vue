@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <div v-if="isUserLoggedIn">
       <button @click="logoutUser">Выход</button>
     </div>
