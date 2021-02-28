@@ -13,13 +13,7 @@
           </div>
           <div class="col-9 container">
             <p class="fs-4 fw-bold">{{productInfo.price}} <i class="list__price-gray fas fa-ruble-sign fs-5"></i></p>
-            <div class="text-warning" data-rating="3">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-            </div>
+            <v-rating value="3" :disabled="true"></v-rating>
             <p class="mb-0">Оценка товара: 2 из 5</p>
             <p class="mb-0">Голосов: 15</p>
             <p class="mb-2">Количество на складе: 2 шт.</p>
@@ -28,12 +22,12 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 col-lg-4 mb-3 mb-lg-0">
+        <div class="col-12 col-lg-3 mb-3 mb-lg-0">
             <div class="list-group shadow-sm bg-white rounded">
             <router-link v-for="tab in tablist" :key="tab.id" class="list-group-item list-group-item-action fs-6 p-3" :to="tab.href"><i class="me-2" :class="tab.icon"></i>{{tab.text}}</router-link>
           </div>
         </div>
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-9">
             <div class="tab-content shadow-sm bg-white rounded border pt-4 pb-3" id="nav-tabContent">
               <router-view class="container " id="routerInfo"></router-view>
           </div>
