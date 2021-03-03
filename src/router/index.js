@@ -12,7 +12,7 @@ import ProductList from '../components/shared/ProductList'
 import ProductInfo from '../components/shared/ProductInfoCard/ProductInfo'
 import authGuard from './auth-guard'
 import Description from '../components/shared/ProductInfoCard/Description'
-import Reviews from '../components/shared/ProductInfoCard/Reviews'
+import Reviews from '../components/shared/ProductInfoCard/reviews/Reviews'
 import Characteristics from '../components/shared/ProductInfoCard/Characteristics'
 
 Vue.use(VueRouter)

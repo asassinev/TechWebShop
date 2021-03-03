@@ -1,99 +1,187 @@
 <template>
-    <div class="star-rating">
-        <label
-            class="star-rating__star"
-            v-for="rating in ratings"
-            :key="rating.id"
-            :class="{'is-selected': ((value >= rating) && value != null), 'is-disabled': disabled}"
-            v-on:click="set(rating)"
-            v-on:mouseover="star_over(rating)"
-            v-on:mouseout="star_out">
-            <input
-                class="star-rating star-rating__checkbox"
-                type="radio"
-                :value="rating"
-                :name="name"
-                v-model="value"
-                :disabled="disabled">
-            ★
-        </label>
+  <div class="Rate" v-if="length > 0">
+    <svg
+      style="position: absolute; width: 0; height: 0;"
+      width="0"
+      height="0"
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <symbol id="icon-star-full" viewBox="0 0 32 32">
+          <path
+            d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798z"
+          ></path>
+        </symbol>
+      </defs>
+    </svg>
+    <input type="hidden" :name="name" v-model="rate" :required="required" />
+    <template v-for="n in length">
+      <span
+        :key="n"
+        :class="{
+          Rate__star: true,
+          hover: n <= over,
+          filled: n <= rate || isFilled(n)
+        }"
+        @mouseover="onOver(n)"
+        @mouseout="onOut(n)"
+        @click="setRate(n)"
+        @keyup="onOver(n)"
+        @keyup.enter="setRate(n)"
+        :disabled="disabled"
+      >
+        <svg class="icon">
+          <use :xlink:href="`#${iconref}`"></use>
+        </svg>
+      </span>
+    </template>
+    <div class="Rate__view" :class="{ disabled: disabled }">
+      <span class="count" v-if="showcount">{{ over }}</span>
+      <span class="desc" v-if="ratedesc.length > 0">{{
+        ratedesc[over - 1]
+      }}</span>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'rate',
+  props: {
+    value: { type: [Number, String] },
+    name: { type: String, default: 'rate' },
+    length: { type: Number },
+    showcount: { type: Boolean },
+    required: { type: Boolean },
+    ratedesc: {
+      type: Array,
+      default () {
+        return []
+      }
+    },
+    disabled: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
+    iconref: { type: String, default: 'icon-star-full' }
+  },
   data () {
     return {
-      temp_value: null,
-      ratings: [1, 2, 3, 4, 5]
+      over: 0,
+      rate: 0
     }
-  },
-  props: {
-    name: String,
-    value: null,
-    id: String,
-    disabled: Boolean,
-    required: Boolean
   },
   methods: {
-    star_over (index) {
-      if (!this.disabled) {
-        this.temp_value = this.value
-        this.value = index
-        return this.value
+    convertValue (value) {
+      if (value >= this.length) {
+        value = this.length
+      } else if (value < 0) {
+        value = 0
       }
+      return value
     },
-    star_out () {
-      if (!this.disabled) {
-        this.value = this.temp_value
-        return this.value
-      }
+    onOver (index) {
+      if (!this.readonly) this.over = index
     },
-    set (value) {
-      if (!this.disabled) {
-        this.temp_value = value
-        this.value = value
-        return this.value
-      }
+    onOut () {
+      if (!this.readonly) this.over = this.rate
+    },
+    setRate (index) {
+      if (this.readonly) return false
+      this.$emit('before-rate', this.rate)
+      this.rate = index
+      this.$emit('input', this.rate)
+      this.$emit('after-rate', this.rate)
+    },
+    isFilled (index) {
+      return index <= this.over
+    },
+    isEmpty (index) {
+      return index > this.over || (!this.value && !this.over)
     }
+  },
+  watch: {
+    value () {
+      this.rate = this.convertValue(this.value)
+      this.over = this.convertValue(this.value)
+    }
+  },
+  created () {
+    if (this.value >= this.length) {
+      this.value = this.length
+    } else if (this.value < 0) {
+      this.value = 0
+    }
+    this.rate = this.convertValue(this.value)
+    this.over = this.convertValue(this.value)
   }
 }
 </script>
 
-<style lang="scss" scoped>
-%visually-hidden {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style>
+.Rate {
+  cursor: default;
 }
-
-.star-rating {
-
-  &__star {
-    display: inline-block;
-    padding: 1px;
-    vertical-align: middle;
-    line-height: 1;
-    font-size: 1.5em;
-    color: #ABABAB;
-    transition: color .2s ease-out;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    &.is-selected {
-      color: #FFD700;
-    }
-
-    &.is-disabled:hover {
-      cursor: default;
-    }
-  }
-  &__checkbox {
-    @extend %visually-hidden;
-  }
+.Rate .icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+  vertical-align: middle;
+  top: -2px;
+  position: relative;
+  margin: 0 2px;
+}
+.Rate__star {
+  color: #dedbdb;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent none;
+  border: 0;
+}
+.Rate__star .icon {
+  top: 0;
+  vertical-align: middle;
+}
+.Rate__star.hover {
+  color: #efc20f;
+}
+.Rate__star.filled {
+  color: #efc20f;
+}
+.Rate__star:hover,
+.Rate__star:focus {
+  text-decoration: none;
+}
+.Rate__view .count,
+.Rate__view .desc {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 7px;
+}
+.Rate.has-error .Rate__star {
+  color: #f37a77;
+}
+.Rate.has-error .Rate__star.hover {
+  color: #efc20f;
+}
+.Rate.has-error .Rate__star.filled {
+  color: #efc20f;
+}
+.Rate__star[disabled] {
+  opacity: 0.8;
+}
+.Rate__star.hover[disabled],
+.Rate__star.filled[disabled] {
+  color: #efc20f;
+  opacity: 0.6;
+}
+.Rate__view.disabled .count,
+.Rate__view.disabled .desc {
+  color: #ccc;
 }
 </style>

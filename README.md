@@ -1,4 +1,4 @@
-# tech
+# TechWebShop
 
 ## Project setup
 ```

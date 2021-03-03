@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h5>Описание {{item[0]}}</h5>
+    <p class="h5">Описание {{ item[0] }}</p>
     <p>
-      {{item[1]}}
+      {{ item[1] }}
     </p>
   </div>
 </template>

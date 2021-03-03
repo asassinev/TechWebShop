@@ -1,33 +1,26 @@
 <template>
-  <!-- <div class="list">
-    <div v-for="product in products" :key="product.id" class="list__item">
-      <div class="list__info">
-        <img class="list__img" :src="product.imgSrc" :alt="product.name">
-        <div class="list__text">
-          <router-link :to="'/product/' + product._id + `/description`" class="list__title">{{ product.name }}</router-link>
-          <p class="list__description">{{ product.titleDescription }}</p>
-        </div>
-        <div class="list__price">
-          <b>{{ product.price }} </b><i class="list__price-gray fas fa-ruble-sign"></i>
-        </div>
-      </div>
-      <div class="list__buttons">
-        <button>Купить</button>
-      </div>
-    </div>
-  </div>
-   -->
   <div>
-    <div class="row g-0 mb-3 position-relative shadow-sm bg-white rounded list" v-for="product in products" :key="product.id">
+    <div
+      class="row g-0 mb-3 position-relative shadow-sm bg-white rounded list"
+      v-for="product in products"
+      :key="product.id"
+    >
       <div class="col-md-2 text-center align-items-center m-auto">
-        <img class="img" :src="product.imgSrc" :alt="product.name">
+        <img class="img" :src="product.imgSrc" :alt="product.name" />
       </div>
       <div class="col-md-10">
         <div class="card-body">
-          <router-link class="card-link text-decoration-none text-dark fw-bold fs-5" :to="'/product/' + product._id + `/description`">{{ product.name }}</router-link>
+          <router-link
+            class="card-link text-decoration-none text-dark fw-bold fs-5"
+            :to="'/product/' + product._id + `/description`"
+            >{{ product.name }}</router-link
+          >
           <p class="mt-2 mb-0">{{ product.titleDescription }}</p>
           <div class="clearfix mt-3">
-            <span class="fs-5 float-start fw-bold">Цена: {{ product.price }} <i class="list__price-gray fas fa-ruble-sign"></i></span>
+            <span class="fs-5 float-start fw-bold"
+              >Цена: {{ product.price }}
+              <i class="list__price-gray fas fa-ruble-sign"></i
+            ></span>
             <button class="btn btn-primary float-end">Купить</button>
           </div>
         </div>
@@ -40,9 +33,22 @@
 export default {
   computed: {
     products () {
-      return this.$store.getters.getList
+      var arr = this.$store.getters.getList
+      arr.sort(function (a, b) {
+        a = parseInt(a.price.replace(' ', '').trim())
+        b = parseInt(b.price.replace(' ', '').trim())
+        if (a > b) {
+          return 1
+        }
+        if (a < b) {
+          return -1
+        }
+        return 0
+      })
+      return arr
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
@@ -52,17 +58,17 @@ export default {
   height: auto;
 }
 .card-link {
-    &:hover {
-      color: #0d6efd!important;
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 140px;
-      height: 148px;
-    }
+  &:hover {
+    color: #0d6efd !important;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 140px;
+    height: 148px;
+  }
 }
 .list {
   color: #272727;
