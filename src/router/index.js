@@ -1,19 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../components/Home'
-import Catalog from '../components/Catalog'
-import Contacts from '../components/Contacts'
-import ShopCard from '../components/ShopCard'
-import Profile from '../components/Profile'
-import Page404 from '../components/Page404'
+
+import authGuard from './auth-guard'
+
+import Home from '../pages/Home'
+import Catalog from '../pages/Catalog'
+import Contacts from '../pages/Contacts'
+import ShopCard from '../pages/ShopCard'
+import Profile from '../pages/Profile'
+import Page404 from '../pages/Page404'
+
 import Login from '../components/auth/Login'
 import Registration from '../components/auth/Registration'
-import ProductList from '../components/shared/ProductList'
-import ProductInfo from '../components/shared/ProductInfoCard/ProductInfo'
-import authGuard from './auth-guard'
-import Description from '../components/shared/ProductInfoCard/Description'
-import Reviews from '../components/shared/ProductInfoCard/reviews/Reviews'
-import Characteristics from '../components/shared/ProductInfoCard/Characteristics'
+
+import ProductList from '../components/productList/ProductList'
+import ProductInformation from '../components/product/ProductInformation'
+import ProductDescription from '../components/product/ProductDescription'
+import ProductСharacteristics from '../components/product/ProductСharacteristics'
+import ProductReviews from '../components/product/ProductReviews'
 
 Vue.use(VueRouter)
 
@@ -55,22 +59,22 @@ export default new VueRouter({
     },
     {
       path: '/product/:idProduct',
-      component: ProductInfo,
+      component: ProductInformation,
       children: [
         {
           path: 'description',
           name: 'description',
-          component: Description
+          component: ProductDescription
         },
         {
           path: 'reviews',
           name: 'reviews',
-          component: Reviews
+          component: ProductReviews
         },
         {
           path: 'characteristics',
           name: 'characteristics',
-          component: Characteristics
+          component: ProductСharacteristics
         }
       ]
     },

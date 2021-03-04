@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Categories from './shared/Categories.vue'
+import Categories from '../components/catalog/Categories'
 
 export default {
   computed: {

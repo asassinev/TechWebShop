@@ -10,7 +10,7 @@
       >
         Написать отзыв
       </button>
-      <ModalReview />
+      <FeedbackForm />
     </section>
     <section v-else>
       <div class="row">
@@ -37,17 +37,17 @@
 </template>
 
 <script>
-import ModalReview from './ModalReview'
-import AverageRating from './AverageRating'
-import RatingCharacteristics from './RatingCharacteristics'
-import RatingReviews from './RatingReviews'
-import ReviewsList from './ReviewsList'
+import FeedbackForm from './reviews/FeedbackForm'
+import AverageRating from './reviews/AverageRating'
+import RatingReviews from './reviews/RatingReviews'
+import RatingCharacteristics from './reviews/RatingCharacteristics'
+import ReviewsList from './reviews/ReviewsList'
 export default {
   components: {
-    ModalReview,
+    FeedbackForm,
     AverageRating,
-    RatingCharacteristics,
     RatingReviews,
+    RatingCharacteristics,
     ReviewsList
   },
   computed: {

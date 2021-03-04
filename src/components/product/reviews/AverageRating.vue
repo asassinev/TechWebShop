@@ -34,15 +34,15 @@
     >
       Написать отзыв
     </button>
-    <ModalReview />
+    <FeedbackForm />
   </div>
 </template>
 
 <script>
-import ModalReview from './ModalReview'
+import FeedbackForm from './FeedbackForm'
 export default {
   components: {
-    ModalReview
+    FeedbackForm
   },
   computed: {
     averageRating () {
