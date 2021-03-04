@@ -71,19 +71,7 @@
         </div>
         <div class="collapse ms-3" :id="'collapseExample' + id">
           <div class="mt-3">
-            <div class="d-flex flex-column">
-              <div class="mb-3 shadow-sm bg-white">
-                <textarea
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="Написать комментарий..."
-                  rows="3"
-                ></textarea>
-              </div>
-              <button class="btn btn-primary align-self-end px-4">
-                Отправить
-              </button>
-            </div>
+            <CommentForm :uName="review.uName" />
             <CommentsList :comments="review.comments" />
           </div>
         </div>
@@ -95,9 +83,11 @@
 
 <script>
 import CommentsList from './CommentsList'
+import CommentForm from './CommentForm'
 export default {
   components: {
-    CommentsList
+    CommentsList,
+    CommentForm
   },
   computed: {
     reviews () {

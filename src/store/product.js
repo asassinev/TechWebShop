@@ -106,6 +106,30 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    async createComment ({ getters }, payload) {
+      var uName = getters.user
+      if (!uName) {
+        uName = 'Гость'
+      }
+      console.log(payload.uName)
+      var date = Date()
+      const newUrl =
+        'http://localhost:8000/create-comment/' +
+        getters.getProductId +
+        '/' +
+        payload.uName
+      axios({
+        method: 'post',
+        url: newUrl,
+        data: { uName: uName, date: date, comment: payload.comment }
+      })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   getters: {
