@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar/>
+    <NavBar />
     <div class="container">
       <nav aria-label="breadcrumb" class="mt-2">
         <ol class="breadcrumb text-decoration-none">
@@ -9,8 +9,8 @@
           <li class="breadcrumb-item active" aria-current="page">Data</li>
         </ol>
       </nav>
-      <hr>
-      <router-view/>
+      <hr />
+      <router-view />
     </div>
   </div>
 </template>
@@ -25,7 +25,8 @@ export default {
 </script>
 
 <style lang="scss">
-html, body {
+html,
+body {
   height: 100%;
   background-color: #f6f6f6;
 }

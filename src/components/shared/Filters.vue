@@ -1,6 +1,12 @@
 <template>
   <div class="filters">
-    <button class="btn btn-primary" @click="getNewList" v-if="checkedNames.length !== 0 || change">Change</button>
+    <button
+      class="btn btn-primary"
+      @click="getNewList"
+      v-if="checkedNames.length !== 0 || change"
+    >
+      Change
+    </button>
     <div class="filters__item">
       <button
         class="btn filters__button w-100 text-start"
@@ -8,13 +14,20 @@
         data-bs-toggle="collapse"
         data-bs-target="#price"
         aria-expanded="false"
-        aria-controls="Цена">
+        aria-controls="Цена"
+      >
         <i class="fas mr-2 ml-2 fa-caret-down"></i> Цена
       </button>
       <div class="collapse" id="price">
         <div class="filters__value mt-4">
           <label>
-            <Slider @change="change = true" :max="maxPrice" class="mb-3 text-primary" v-model="value" :format="format"/>
+            <Slider
+              @change="change = true"
+              :max="maxPrice"
+              class="mb-3 text-primary"
+              v-model="value"
+              :format="format"
+            />
           </label>
         </div>
       </div>
@@ -26,12 +39,23 @@
         data-bs-toggle="collapse"
         :data-bs-target="filter.id"
         aria-expanded="false"
-        :aria-controls="filter.ariaControl">
+        :aria-controls="filter.ariaControl"
+      >
         <i class="fas mr-2 ml-2 fa-caret-down"></i> {{ filter.name }}
       </button>
       <ul class="collapse list-group" :id="filter.ariaControl">
-        <li class="list-group-item" v-for="(item, id) in filter.items" :key="id">
-          <input :type="filter.type" :value="item.value" v-model="checkedNames" :name="filter.ariaControl"> {{ item.name }}
+        <li
+          class="list-group-item"
+          v-for="(item, id) in filter.items"
+          :key="id"
+        >
+          <input
+            :type="filter.type"
+            :value="item.value"
+            v-model="checkedNames"
+            :name="filter.ariaControl"
+          />
+          {{ item.name }}
         </li>
       </ul>
     </div>

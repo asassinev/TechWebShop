@@ -1,19 +1,46 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top text-center">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top text-center"
+  >
     <div class="container">
       <router-link class="navbar-brand me-5" to="/">TECH</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav row container">
           <li class="nav-item dropdown col">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               Каталог
             </a>
-            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li v-for="(link, id) in catalog" :key="id" @click="setRouteParams(link.name)">
-                <router-link to='#' @click="setRouteParams(link.name)" class="dropdown-item">
+            <ul
+              class="dropdown-menu dropdown-menu-light"
+              aria-labelledby="navbarDarkDropdownMenuLink"
+            >
+              <li
+                v-for="(link, id) in catalog"
+                :key="id"
+                @click="setRouteParams(link.name)"
+              >
+                <router-link
+                  to="#"
+                  @click="setRouteParams(link.name)"
+                  class="dropdown-item"
+                >
                   {{ link.title }}
                 </router-link>
               </li>

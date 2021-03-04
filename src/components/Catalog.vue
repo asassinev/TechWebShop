@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-left">Каталог</h1>
-    <Categories :catalog="catalog"/>
+    <Categories :catalog="catalog" />
   </div>
 </template>
 

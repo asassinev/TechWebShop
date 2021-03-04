@@ -8,10 +8,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-    }
-  },
   computed: {
     isUserLoggedIn () {
       return this.$store.getters.isUserLoggedIn

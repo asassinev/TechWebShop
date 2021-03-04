@@ -1,44 +1,69 @@
 <template>
-<div class="container">
-  <div class="row justify-content-center">
-    <form class="col-sm-12 col-lg-6 form shadow p-3 bg-white rounded" @submit.prevent="submit">
-      <h1 class="text-center fs-2 text-primary m-0">Авторизация</h1>
-      <hr>
-      <div class="form-floating mb-3" :class="{ 'errors': emailErrors[0]}">
-        <input
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-          placeholder="Enter e-mail..."
-          class="form-control"
-          id="email"
-          type="email"
-          v-model="email">
-        <label for="floatingInput">Email address</label>
-        <div v-if="emailErrors[0]" :class="{'pl-2 invalid-feedback': emailErrors[0]}">{{ emailErrors[0] }}</div>
-      </div>
-      <div class="form-floating mb-3" :class="{ 'errors': passwordErrors[0]}">
-        <input
-          @input="$v.password.$touch()"
-          @blur="$v.password.$touch()"
-          class="form-control"
-          id="password"
-          v-model="password"
-          placeholder="Enter password..."
-          type="password">
-        <label for="floatingInput">Password</label>
-        <div v-if="passwordErrors[0]" :class="{'pl-2 invalid-feedback': passwordErrors[0]}">{{ passwordErrors[0] }}</div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12 col-md-6">
-          <button type="button" class="mb-2 mb-md-0 btn btn-primary btn-lg w-100" @click="submit">Войти</button>
+  <div class="container">
+    <div class="row justify-content-center">
+      <form
+        class="col-sm-12 col-lg-6 form shadow p-3 bg-white rounded"
+        @submit.prevent="submit"
+      >
+        <h1 class="text-center fs-2 text-primary m-0">Авторизация</h1>
+        <hr />
+        <div class="form-floating mb-3" :class="{ errors: emailErrors[0] }">
+          <input
+            @input="$v.email.$touch()"
+            @blur="$v.email.$touch()"
+            placeholder="Enter e-mail..."
+            class="form-control"
+            id="email"
+            type="email"
+            v-model="email"
+          />
+          <label for="floatingInput">Email address</label>
+          <div
+            v-if="emailErrors[0]"
+            :class="{ 'pl-2 invalid-feedback': emailErrors[0] }"
+          >
+            {{ emailErrors[0] }}
+          </div>
         </div>
-        <div class="col-sm-12 col-md-6">
-          <router-link class="btn btn-secondary btn-lg w-100" to="/registration">Создать аккаунт</router-link>
+        <div class="form-floating mb-3" :class="{ errors: passwordErrors[0] }">
+          <input
+            @input="$v.password.$touch()"
+            @blur="$v.password.$touch()"
+            class="form-control"
+            id="password"
+            v-model="password"
+            placeholder="Enter password..."
+            type="password"
+          />
+          <label for="floatingInput">Password</label>
+          <div
+            v-if="passwordErrors[0]"
+            :class="{ 'pl-2 invalid-feedback': passwordErrors[0] }"
+          >
+            {{ passwordErrors[0] }}
+          </div>
         </div>
-      </div>
-    </form>
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <button
+              type="button"
+              class="mb-2 mb-md-0 btn btn-primary btn-lg w-100"
+              @click="submit"
+            >
+              Войти
+            </button>
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <router-link
+              class="btn btn-secondary btn-lg w-100"
+              to="/registration"
+              >Создать аккаунт</router-link
+            >
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -74,7 +99,8 @@ export default {
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
-      !this.$v.password.minLength && errors.push('Min length of password 8 letters')
+      !this.$v.password.minLength &&
+        errors.push('Min length of password 8 letters')
       !this.$v.password.required && errors.push('Password is required')
       return errors
     }
