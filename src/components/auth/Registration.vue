@@ -13,7 +13,6 @@
             @blur="$v.email.$touch()"
             placeholder="Enter e-mail..."
             class="form-control form-control-lg"
-            id="email"
             type="email"
             v-model="email"
           />
@@ -136,11 +135,19 @@ export default {
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR'
       } else {
-        console.log('done')
+        var user = {
+          email: this.email,
+          password: this.password
+        }
         this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
+        this.$store.dispatch('createUser', user).finally(() => {
+          this.$store.dispatch('loginUser', user).finally(() => {
+            if (this.$store.getters.getUs) {
+              this.$router.push('/profile')
+            }
+          })
+        })
+        this.submitStatus = 'OK'
       }
     }
   }

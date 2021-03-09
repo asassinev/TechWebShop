@@ -43,6 +43,7 @@
             {{ passwordErrors[0] }}
           </div>
         </div>
+        <p class="text-danger">{{ error }}</p>
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <button
@@ -75,7 +76,8 @@ export default {
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      error: ''
     }
   },
   validations: {
@@ -108,15 +110,18 @@ export default {
   methods: {
     submit () {
       this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
-      } else {
-        this.$store.dispatch('loginUser', 1)
-        this.$router.push('/profile')
-        this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
+      if (!this.$v.$invalid) {
+        var user = {
+          email: this.email,
+          password: this.password
+        }
+        this.$store.dispatch('loginUser', user).finally(() => {
+          if (this.$store.getters.getError) {
+            this.error = this.$store.getters.getError
+          } else if (this.$store.getters.getUs) {
+            this.$router.push('/profile')
+          }
+        })
       }
     }
   }
