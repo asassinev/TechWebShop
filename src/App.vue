@@ -2,7 +2,7 @@
   <div>
     <NavBar />
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-2">
+      <nav aria-label="breadcrumb" class="mt-3">
         <ol class="breadcrumb text-decoration-none">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item"><a href="#">Library</a></li>
@@ -12,14 +12,20 @@
       <hr />
       <router-view />
     </div>
+    <Notificaton />
   </div>
 </template>
 
 <script>
 import NavBar from './components/NavBar'
+import Notificaton from './components/shared/Notification'
 export default {
   components: {
-    NavBar
+    NavBar,
+    Notificaton
+  },
+  created () {
+    this.$store.commit('setUser', JSON.parse(localStorage.getItem('user')))
   }
 }
 </script>
@@ -28,6 +34,6 @@ export default {
 html,
 body {
   height: 100%;
-  background-color: #f6f6f6;
+  background-color: #f6f6f6 !important;
 }
 </style>
