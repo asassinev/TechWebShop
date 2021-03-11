@@ -4,8 +4,9 @@
       <p v-if="r.count === 0" class=" mb-0">0 отзывов</p>
       <p v-else-if="r.count === 1" class=" mb-0">{{ r.count }} отзыв</p>
       <p v-else-if="r.count > 1" class=" mb-0">{{ r.count }} отзывов</p>
-      <div class="progress mt-2 mb-3" style="height: 20px;">
+      <div class="progress rounded mt-2 mb-3" style="height: 20px;">
         <span
+          style="line-height: 1.25rem;"
           class="ps-2 position-absolute"
           :class="{
             'text-white': r.count !== 0,

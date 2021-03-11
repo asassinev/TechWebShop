@@ -7,13 +7,13 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="fas fa-bars"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav row container">
@@ -22,7 +22,7 @@
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink"
               role="button"
-              data-bs-toggle="dropdown"
+              data-mdb-toggle="dropdown"
               aria-expanded="false"
             >
               Каталог
@@ -105,12 +105,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .navbar {
-//   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-//   &-width {
-//     width: 95%;
-//   }
-
+.navbar {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  &-width {
+    width: 95%;
+  }
+}
 //   &__title {
 //     font-size: 28px;
 //     margin: 0;
@@ -147,7 +147,9 @@ export default {
 
 .dropdown {
   &-menu {
-    left: 34%;
+    left: auto !important;
+    right: 43%;
+    transform: translateX(50%);
   }
   &-item {
     cursor: pointer;

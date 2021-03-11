@@ -5,9 +5,9 @@
         <div class="me-2">
           <i class="fs-3 fas fa-user-astronaut text-primary p-2"></i>
         </div>
-        <span class="ms-3 fw-bold">{{ comment.uName }}</span>
+        <span class="fw-bold">{{ comment.uName }}</span>
       </div>
-      <p class="mb-1 text-secondary">
+      <p class="mb-1 text-black-50">
         {{ comment.date }}
       </p>
       <p>{{ comment.comment }}</p>

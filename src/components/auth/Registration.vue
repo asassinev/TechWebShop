@@ -4,6 +4,7 @@
       <form
         class="col-sm-12 col-lg-6 form shadow p-3 bg-white rounded"
         @submit.prevent="submit"
+        novalidate
       >
         <h1 class="text-center fs-2 text-primary m-0">Регистрация</h1>
         <hr />
@@ -11,15 +12,17 @@
           <input
             @input="$v.email.$touch()"
             @blur="$v.email.$touch()"
-            placeholder="Enter e-mail..."
-            class="form-control form-control-lg"
+            class="form-control form-control-md"
             type="email"
             v-model="email"
+            placeholder="Email address"
+            id="email"
+            required
           />
           <label for="floatingInput">Email address</label>
           <div
             v-if="emailErrors[0]"
-            :class="{ 'pl-2 invalid-feedback': emailErrors[0] }"
+            :class="{ 'invalid-feedback': emailErrors[0] }"
           >
             {{ emailErrors[0] }}
           </div>
@@ -28,16 +31,17 @@
           <input
             @input="$v.password.$touch()"
             @blur="$v.password.$touch()"
-            class="form-control form-control-lg"
+            class="form-control form-control-md"
             id="password"
             v-model="password"
-            placeholder="Enter password..."
+            placeholder="Password"
             type="password"
+            required
           />
-          <label for="floatingInput">Password</label>
+          <label class="form-label" for="floatingInput">Password</label>
           <div
             v-if="passwordErrors[0]"
-            :class="{ 'pl-2 invalid-feedback': passwordErrors[0] }"
+            :class="{ 'invalid-feedback': passwordErrors[0] }"
           >
             {{ passwordErrors[0] }}
           </div>
@@ -49,16 +53,17 @@
           <input
             @input="$v.repeatPassword.$touch()"
             @blur="$v.repeatPassword.$touch()"
-            class="form-control form-control-lg"
+            class="form-control form-control-md"
             id="repeatPassword"
             v-model="repeatPassword"
-            placeholder="Repeat password..."
+            placeholder="Repeat password"
             type="password"
+            required
           />
-          <label for="floatingInput">Repeat password</label>
+          <label class="form-label" for="floatingInput">Repeat password</label>
           <div
             v-if="repeatPasswordErrors[0]"
-            :class="{ 'pl-2 invalid-feedback': repeatPasswordErrors[0] }"
+            :class="{ 'invalid-feedback': repeatPasswordErrors[0] }"
           >
             {{ repeatPasswordErrors[0] }}
           </div>
@@ -123,7 +128,6 @@ export default {
     repeatPasswordErrors () {
       const errors = []
       if (!this.$v.repeatPassword.$dirty) return errors
-      !this.$v.password.required && errors.push('Password is required')
       !this.$v.repeatPassword.sameAsPassword &&
         errors.push('Passwords do not match.')
       return errors
@@ -132,24 +136,28 @@ export default {
   methods: {
     submit () {
       this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
-      } else {
+      if (!this.$v.$invalid) {
         var user = {
           email: this.email,
           password: this.password
         }
-        this.submitStatus = 'PENDING'
         this.$store.dispatch('createUser', user).finally(() => {
-          this.$store.dispatch('loginUser', user).finally(() => {
-            if (this.$store.getters.getUs) {
-              this.$router.push('/profile')
-            }
+          this.$store.dispatch('setNotification', {
+            title: 'success',
+            text: 'Аккаунт успешно создан'
           })
+          this.$router.push('/login')
         })
-        this.submitStatus = 'OK'
       }
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.invalid-feedback {
+  position: relative;
+  display: block;
+  margin: 4px 0 0 8px;
+}
+</style>

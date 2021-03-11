@@ -29,8 +29,8 @@
     <button
       type="button"
       class="btn btn-primary d-block w-100 mt-3 mb-2"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
+      data-mdb-toggle="modal"
+      data-mdb-target="#exampleModal"
     >
       Написать отзыв
     </button>

@@ -16,7 +16,7 @@
           :length="5"
           :value="review.generalRating"
         ></v-rating>
-        <p class="mt-2 mb-0 w-100 text-secondary">
+        <p class="mt-2 mb-0 w-100 text-black-50">
           {{ review.date }}
         </p>
       </div>
@@ -41,7 +41,7 @@
             <a
               @click="changeIcon(id, review.comments.length)"
               :id="id"
-              data-bs-toggle="collapse"
+              data-mdb-toggle="collapse"
               :href="'#collapseExample' + id"
               role="button"
               aria-expanded="false"
@@ -63,7 +63,7 @@
                   ? 'bg-success'
                   : 'bg-secondary'
               ]"
-              class="user-select-none rounded px-2 text-white mx-2"
+              class="user-select-none rounded px-2 p-1 text-white mx-2"
               >{{ review.counterLike }}</span
             >
             <i @click="updateCounter(-1)" class="far fa-thumbs-down"></i>

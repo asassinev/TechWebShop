@@ -89,8 +89,17 @@ export default {
       console.log('changed')
     },
     async createReview ({ getters }, payload) {
-      if (payload.uName === null) {
+      if (!getters.getUs) {
         payload.uName = 'Гость'
+      } else if (getters.getUs.firstName || getters.getUs.secondName) {
+        payload.uName = getters.getUs.firstName + ' ' + getters.getUs.secondName
+      } else {
+        payload.uName =
+          'astronaut-' +
+          Math.random()
+            .toFixed(9)
+            .replace('0.', ' ')
+            .trim()
       }
       const newUrl =
         'http://localhost:8000/create-review/' + getters.getProductId
@@ -113,7 +122,7 @@ export default {
         uName = 'Гость'
       }
       console.log(payload.uName)
-      var date = Date()
+      var date = new Date().toLocaleString()
       const newUrl =
         'http://localhost:8000/create-comment/' +
         getters.getProductId +

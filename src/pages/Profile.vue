@@ -49,7 +49,7 @@
         <input
           class="form-check-input"
           type="radio"
-          name="radio"
+          value="Не выбрано"
           v-model="user.sex"
           id="default"
         />
@@ -58,13 +58,25 @@
         </label>
       </div>
       <div class="form-check mb-3">
-        <input class="form-check-input" type="radio" name="radio" id="male" />
+        <input
+          class="form-check-input"
+          type="radio"
+          value="Мужской"
+          id="male"
+          v-model="user.sex"
+        />
         <label class="form-check-label" for="male">
           Мужской
         </label>
       </div>
       <div class="form-check mb-3">
-        <input class="form-check-input" type="radio" name="radio" id="female" />
+        <input
+          class="form-check-input"
+          type="radio"
+          value="Женский"
+          id="female"
+          v-model="user.sex"
+        />
         <label class="form-check-label" for="female">
           Женский
         </label>
@@ -73,11 +85,13 @@
     <div class="mb-3">
       <button class="btn btn-primary" @click="changeUser">Сохранить</button>
       <button @click="logoutUser" class="ms-3 btn btn-secondary">
-        Удалить аккаунт
+        Выход
       </button>
     </div>
     <div class="bg-light text-center p-3">
-      <p class="m-0">Дата регистрации: <strong>date</strong></p>
+      <p class="m-0">
+        Дата регистрации: <strong>{{ user.date }}</strong>
+      </p>
     </div>
   </div>
 </template>
@@ -97,7 +111,9 @@ export default {
       this.$store.dispatch('logoutUser')
       this.$router.push('/login')
     },
-    changeUser () {}
+    changeUser () {
+      this.$store.dispatch('changeUser', this.user)
+    }
   }
 }
 </script>

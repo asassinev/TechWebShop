@@ -4,6 +4,26 @@
       <Loader />
     </div>
     <div v-else class="row mt-3">
+      <div>
+        <label for="up"
+          ><input
+            type="checkbox"
+            id="up"
+            @click="$store.dispatch('setSortParams', 'priceUp')"
+          />
+          По возрастанию цены
+        </label>
+      </div>
+      <div>
+        <label for="down"
+          ><input
+            type="checkbox"
+            id="down"
+            @click="$store.dispatch('setSortParams', 'priceDown')"
+          />
+          По убыванию цены
+        </label>
+      </div>
       <div class="col-12 col-lg-4 mb-3">
         <Filters />
       </div>

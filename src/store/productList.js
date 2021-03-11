@@ -5,7 +5,8 @@ export default {
     list: null,
     newList: null,
     filters: null,
-    maxPrice: 0
+    maxPrice: 0,
+    sortParams: ''
   },
   mutations: {
     setList (state, payload) {
@@ -19,6 +20,9 @@ export default {
     },
     setMaxPrice (state, payload) {
       state.maxPrice = payload
+    },
+    setSortParams (state, payload) {
+      state.sortParams = payload
     }
   },
   actions: {
@@ -40,6 +44,9 @@ export default {
           console.log(error)
         })
       commit('setLoading', false)
+    },
+    setSortParams ({ commit }, payload) {
+      commit('setSortParams', payload)
     }
   },
   getters: {
@@ -47,12 +54,27 @@ export default {
       return state.list
     },
     getNewList (state) {
-      return state.list.filter(p => {
-        return (
-          parseInt(p.price.split(' ').join('')) >= 0 &&
-          parseInt(p.price.split(' ').join('')) <= 5000
-        )
-      })
+      var arr = state.list
+      console.log(state.sortParam)
+      switch (state.sortParam) {
+        case 'priceUp':
+          arr.sort(function (a, b) {
+            return parseInt(a.price.replace(' ', '').trim()) >
+              parseInt(b.price.replace(' ', '').trim())
+              ? 1
+              : -1
+          })
+          break
+        case 'priceDown':
+          arr.sort(function (a, b) {
+            return parseInt(a.price.replace(' ', '').trim()) <
+              parseInt(b.price.replace(' ', '').trim())
+              ? 1
+              : -1
+          })
+          break
+      }
+      return arr
     },
     getFilters (state) {
       return state.filters
@@ -68,6 +90,9 @@ export default {
     },
     maxPrice (state) {
       return state.maxPrice
+    },
+    getSortParams (state) {
+      return state.sortParams
     }
   }
 }

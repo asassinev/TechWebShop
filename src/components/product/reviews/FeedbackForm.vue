@@ -15,7 +15,7 @@
           <button
             type="button"
             class="btn-close"
-            data-bs-dismiss="modal"
+            data-mdb-dismiss="modal"
             aria-label="Close"
           ></button>
         </div>
@@ -130,7 +130,7 @@
           <button
             type="button"
             class="btn btn-secondary"
-            data-bs-dismiss="modal"
+            data-mdb-dismiss="modal"
           >
             Закрыть
           </button>
@@ -196,7 +196,7 @@ export default {
         this.error = true
         console.log('error')
       } else {
-        this.data.date = Date()
+        this.data.date = new Date().toLocaleString()
         this.$store.dispatch('createReview', this.data)
         this.error = false
         console.log('ok')

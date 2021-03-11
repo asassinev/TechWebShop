@@ -2,19 +2,21 @@ import axios from 'axios'
 
 class User {
   constructor (
+    _id = null,
     email,
     password,
     firstName = '',
     secondName = '',
     sex = 'Не выбрано',
-    _id = null
+    date = null
   ) {
+    this._id = _id
     this.email = email
     this.password = password
     this.firstName = firstName
     this.secondName = secondName
     this.sex = sex
-    this._id = _id
+    this.date = new Date().toLocaleString()
   }
 }
 
@@ -29,7 +31,6 @@ export default {
   },
   actions: {
     async createUser ({ commit }, { email, password }) {
-      console.log(new User(email, password))
       await axios({
         method: 'post',
         url: 'http://localhost:8000/create-user',
@@ -42,34 +43,55 @@ export default {
           console.log(error)
         })
     },
-    async loginUser ({ commit }, { email, password }) {
+    async loginUser ({ commit, getters, dispatch }, { email, password }) {
       commit('setLoading', true)
       await axios({
         method: 'get',
         url: 'http://localhost:8000/login-user/' + email + '/' + password
       })
         .then(response => {
-          commit('setError', null)
+          commit('setNotification', null)
           commit(
             'setUser',
             new User(
+              response.data._id,
               response.data.email,
               response.data.password,
               response.data.firstName,
               response.data.secondName,
-              response.data.sex,
-              response.data._id
+              response.data.sex
             )
           )
+          localStorage.setItem('user', JSON.stringify(getters.getUs))
+          console.log(localStorage.getItem('user'))
         })
         .catch(error => {
-          commit('setError', 'Username or password is incorrect')
+          dispatch('setNotification', {
+            title: 'error',
+            text: 'Username or password is incorrect'
+          })
           console.log(error)
         })
       commit('setLoading', false)
     },
     logoutUser ({ commit }) {
+      localStorage.removeItem('user')
       commit('setUser', null)
+    },
+    async changeUser ({ commit }, payload) {
+      await axios({
+        method: 'post',
+        url: 'http://localhost:8000/change-user/',
+        data: payload
+      })
+        .then(response => {
+          console.log(response)
+          localStorage.removeItem('user')
+          localStorage.setItem('user', JSON.stringify(payload))
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   getters: {

@@ -7,37 +7,12 @@
     >
       Change
     </button>
-    <div class="filters__item">
-      <button
-        class="btn filters__button w-100 text-start"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#price"
-        aria-expanded="false"
-        aria-controls="Цена"
-      >
-        <i class="fas mr-2 ml-2 fa-caret-down"></i> Цена
-      </button>
-      <div class="collapse" id="price">
-        <div class="filters__value mt-4">
-          <label>
-            <Slider
-              @change="change = true"
-              :max="maxPrice"
-              class="mb-3 text-primary"
-              v-model="value"
-              :format="format"
-            />
-          </label>
-        </div>
-      </div>
-    </div>
     <div v-for="filter in filters" :key="filter.id" class="filters__item">
       <button
         class="btn filters__button w-100 text-start"
         type="button"
-        data-bs-toggle="collapse"
-        :data-bs-target="filter.id"
+        data-mdb-toggle="collapse"
+        :data-mdb-target="filter.id"
         aria-expanded="false"
         :aria-controls="filter.ariaControl"
       >
@@ -52,7 +27,7 @@
           <input
             :type="filter.type"
             :value="item.value"
-            v-model="checkedNames"
+            v-model="checkedNames[id]"
             :name="filter.ariaControl"
           />
           {{ item.name }}
@@ -63,9 +38,8 @@
 </template>
 
 <script>
-import Slider from '@vueform/slider/dist/slider.vue2.js'
-
 export default {
+  props: ['sortParam'],
   data () {
     return {
       change: false,
@@ -120,9 +94,6 @@ export default {
       checkedNames: []
     }
   },
-  components: {
-    Slider
-  },
   computed: {
     maxPrice () {
       return this.$store.getters.maxPrice
@@ -141,8 +112,6 @@ export default {
   }
 }
 </script>
-
-<style src="@vueform/slider/themes/default.css"></style>
 
 <style lang="scss" scoped>
 .card {

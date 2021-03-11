@@ -20,7 +20,7 @@
           <label for="floatingInput">Email address</label>
           <div
             v-if="emailErrors[0]"
-            :class="{ 'pl-2 invalid-feedback': emailErrors[0] }"
+            :class="{ 'invalid-feedback': emailErrors[0] }"
           >
             {{ emailErrors[0] }}
           </div>
@@ -38,7 +38,7 @@
           <label for="floatingInput">Password</label>
           <div
             v-if="passwordErrors[0]"
-            :class="{ 'pl-2 invalid-feedback': passwordErrors[0] }"
+            :class="{ 'invalid-feedback': passwordErrors[0] }"
           >
             {{ passwordErrors[0] }}
           </div>
@@ -116,7 +116,7 @@ export default {
           password: this.password
         }
         this.$store.dispatch('loginUser', user).finally(() => {
-          if (this.$store.getters.getError) {
+          if (this.$store.getters.getNotification) {
             this.error = this.$store.getters.getError
           } else if (this.$store.getters.getUs) {
             this.$router.push('/profile')
@@ -128,13 +128,10 @@ export default {
 }
 </script>
 
-<style lang="scss">
-.errors {
-  input {
-    border-color: red;
-  }
-}
+<style lang="scss" scoped>
 .invalid-feedback {
+  position: relative;
   display: block;
+  margin: 4px 0 0 8px;
 }
 </style>
