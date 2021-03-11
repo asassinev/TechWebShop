@@ -1,7 +1,8 @@
 export default {
   state: {
     loading: false,
-    error: ''
+    error: '',
+    notification: null
   },
   mutations: {
     setLoading (state, payload) {
@@ -9,6 +10,9 @@ export default {
     },
     setError (state, payload) {
       state.error = payload
+    },
+    setNotification (state, payload) {
+      state.notification = payload
     }
   },
   actions: {
@@ -17,6 +21,12 @@ export default {
     },
     setError ({ commit }, payload) {
       commit('setError', payload)
+    },
+    setNotification ({ commit }, payload) {
+      commit('setNotification', payload)
+      setTimeout(() => {
+        commit('setNotification', null)
+      }, 2000)
     }
   },
   getters: {
@@ -25,6 +35,9 @@ export default {
     },
     getError (state) {
       return state.error
+    },
+    getNotification (state) {
+      return state.notification
     }
   }
 }
