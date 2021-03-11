@@ -7,15 +7,16 @@ import App from './App.vue'
 import Loader from './components/shared/Loader'
 import StarRating from './components/shared/starRating'
 
-import VueCompositionAPI from '@vue/composition-api'
 import VueEllipseProgress from 'vue-ellipse-progress'
+import * as mdb from 'mdb-ui-kit'
+import '../node_modules/mdb-ui-kit/css/mdb.min.css'
 
 Vue.component('Loader', Loader)
 Vue.component('v-rating', StarRating)
 
 Vue.use(Vuelidate)
+Vue.use(mdb)
 Vue.use(VueEllipseProgress)
-Vue.use(VueCompositionAPI)
 
 Vue.config.productionTip = false
 
