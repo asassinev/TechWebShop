@@ -1,29 +1,25 @@
 <template>
-  <div class="list">
-    <div
-      class="row g-0 mb-3 position-relative shadow-sm bg-white rounded list__item"
-      v-for="product in products"
-      :key="product.id"
-    >
-      <div class="col-md-2 text-center align-items-center m-auto">
-        <img class="list__img" :src="product.imgSrc" :alt="product.name" />
-      </div>
-      <div class="col-md-10">
-        <div class="list__body">
-          <div>
-            <router-link
-              class="list__link text-decoration-none text-dark fw-bold"
-              :to="'/product/' + product._id + `/description`"
-              >{{ product.name }}</router-link
-            >
-            <p class="mt-2 list__description">{{ product.titleDescription }}</p>
-          </div>
-          <div class="clearfix">
-            <span class="list__price float-start fw-bold"
-              >Цена: {{ product.price }} <i class="fas fa-ruble-sign"></i
-            ></span>
-            <button class="btn btn-primary float-end">Купить</button>
-          </div>
+  <div
+    class="row g-0 mb-3 position-relative shadow-sm bg-white rounded list__item"
+  >
+    <div class="col-md-2 text-center align-items-center m-auto">
+      <img class="list__img" :src="product.imgSrc" :alt="product.name" />
+    </div>
+    <div class="col-md-10">
+      <div class="list__body">
+        <div>
+          <router-link
+            class="list__link text-decoration-none text-dark fw-bold"
+            :to="'/product/' + product._id + `/description`"
+            >{{ product.name }}</router-link
+          >
+          <p class="mt-2 list__description">{{ product.titleDescription }}</p>
+        </div>
+        <div class="clearfix">
+          <span class="list__price float-start fw-bold"
+            >Цена: {{ product.price }} <i class="fas fa-ruble-sign"></i
+          ></span>
+          <button class="btn btn-primary float-end">Купить</button>
         </div>
       </div>
     </div>
@@ -32,12 +28,7 @@
 
 <script>
 export default {
-  data () {
-    return {
-      products: []
-    }
-  },
-  methods: {}
+  props: ['product']
 }
 </script>
 
