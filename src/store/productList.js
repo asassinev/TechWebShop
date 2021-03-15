@@ -53,29 +53,6 @@ export default {
     getList (state) {
       return state.list
     },
-    getNewList (state) {
-      var arr = state.list
-      console.log(state.sortParam)
-      switch (state.sortParam) {
-        case 'priceUp':
-          arr.sort(function (a, b) {
-            return parseInt(a.price.replace(' ', '').trim()) >
-              parseInt(b.price.replace(' ', '').trim())
-              ? 1
-              : -1
-          })
-          break
-        case 'priceDown':
-          arr.sort(function (a, b) {
-            return parseInt(a.price.replace(' ', '').trim()) <
-              parseInt(b.price.replace(' ', '').trim())
-              ? 1
-              : -1
-          })
-          break
-      }
-      return arr
-    },
     getFilters (state) {
       return state.filters
     },
