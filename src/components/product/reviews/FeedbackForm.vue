@@ -78,7 +78,7 @@
           <ul class="list-group" v-if="ratingCharacteristics">
             <li
               class="list-group-item border-0"
-              v-for="(item, id) in data.subRatings"
+              v-for="(item, id) in data.subRating"
               :key="id"
             >
               <p class="m-0 fs-6">{{ item.title }}</p>
@@ -171,7 +171,7 @@ export default {
   },
   watch: {
     ratingCharacteristics () {
-      this.data.subRatings = this.ratingCharacteristics
+      this.data.subRating = this.ratingCharacteristics
     }
   },
   computed: {
