@@ -6,6 +6,7 @@ import productList from './productList'
 import product from './product'
 import shared from './shared'
 import ratingCharacteristics from './ratingCharacteristics'
+import orders from './orders'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     productList,
     product,
     shared,
-    ratingCharacteristics
+    ratingCharacteristics,
+    orders
   }
 })

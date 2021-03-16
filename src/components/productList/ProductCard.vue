@@ -19,7 +19,12 @@
           <span class="list__price float-start fw-bold"
             >Цена: {{ product.price }} <i class="fas fa-ruble-sign"></i
           ></span>
-          <button class="btn btn-primary float-end">Купить</button>
+          <button
+            class="btn btn-primary float-end"
+            @click="addToOrder(product)"
+          >
+            Купить
+          </button>
         </div>
       </div>
     </div>
@@ -28,7 +33,25 @@
 
 <script>
 export default {
-  props: ['product']
+  props: ['product'],
+  methods: {
+    addToOrder (product) {
+      const newProduct = {
+        _id: product._id,
+        imgSrc: product.imgSrc,
+        name: product.name,
+        count: 1,
+        price: product.price,
+        total: 0
+      }
+      this.$store.dispatch('addOrder', newProduct)
+      const notification = {
+        title: 'success',
+        text: 'Успешно добавлено в корзину'
+      }
+      this.$store.dispatch('setNotification', notification)
+    }
+  }
 }
 </script>
 
