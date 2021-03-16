@@ -13,12 +13,6 @@
             v-model="filter"
           />
         </div>
-        <!-- <input
-              v-model="filter"
-              @input="page = 1"
-              class="form-control bg-white"
-            />
-            <label class="form-label ms-2">Search</label> -->
       </div>
       <div class="mt-3 mb-3 mt-md-0 col-md-6 col-12">
         <select class="form-select" v-model="order">
