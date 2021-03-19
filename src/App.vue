@@ -27,7 +27,7 @@ export default {
   created () {
     this.$store.commit('setUser', JSON.parse(localStorage.getItem('user')))
     if (localStorage.getItem('orders')) {
-      this.$store.commit('setOrders', localStorage.getItem('orders'))
+      this.$store.dispatch('addOrders', localStorage.getItem('orders'))
     }
   }
 }
