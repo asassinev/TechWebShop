@@ -9,6 +9,7 @@ import Contacts from '../pages/Contacts'
 import ShopCard from '../pages/ShopCard'
 import Profile from '../pages/Profile'
 import Page404 from '../pages/Page404'
+import Checkout from '../pages/Checkout'
 
 import Login from '../components/auth/Login'
 import Registration from '../components/auth/Registration'
@@ -44,6 +45,10 @@ export default new VueRouter({
       path: '/profile',
       component: Profile,
       beforeEnter: authGuard
+    },
+    {
+      path: '/checkout',
+      component: Checkout
     },
     {
       path: '/login',
