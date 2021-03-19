@@ -80,7 +80,6 @@ export default {
       return this.sortProduct(this.productList)
     },
     filteredProducts () {
-      console.log(this.newList)
       return this.newList.filter(p =>
         p.name.toLowerCase().includes(this.filter.toLowerCase())
       )
