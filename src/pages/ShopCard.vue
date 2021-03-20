@@ -48,24 +48,15 @@
               >
                 +
               </button>
-              <p class="pt-2 fs-6 text-center" v-if="order.count > 1">
+              <p
+                class="pt-2 fs-8 text-black-50 text-center"
+                v-if="order.count > 1"
+              >
                 {{ order.price }}
-                <i
-                  data-v-aca7c986=""
-                  class="fas fa-ruble-sign"
-                  aria-hidden="true"
-                ></i>
-                / шт.
+                ₽ / шт.
               </p>
             </div>
-            <p class="mt-3">
-              Цена: {{ (+order.total).toLocaleString() }}
-              <i
-                data-v-aca7c986=""
-                class="fas fa-ruble-sign"
-                aria-hidden="true"
-              ></i>
-            </p>
+            <p class="mt-3 fw-bold">{{ (+order.total).toLocaleString() }} ₽</p>
           </div>
         </div>
       </div>
@@ -79,11 +70,7 @@
               ><span v-else-if="totalCountProducts > 4">ов</span>
               на
               {{ (+totalPrice).toLocaleString() }}
-              <i
-                data-v-aca7c986=""
-                class="fas fa-ruble-sign"
-                aria-hidden="true"
-              ></i>
+              ₽
             </p>
           </div>
           <hr class="m-0" />
@@ -442,6 +429,9 @@ export default {
 <style lang="scss" scoped>
 .fs-7 {
   font-size: 14px;
+}
+.fs-8 {
+  font-size: 11px;
 }
 .order {
   &__body {

@@ -36,11 +36,7 @@
                 :key="id"
                 @click="setRouteParams(link.name)"
               >
-                <router-link
-                  to="#"
-                  @click="setRouteParams(link.name)"
-                  class="dropdown-item"
-                >
+                <router-link to="#" class="dropdown-item">
                   {{ link.title }}
                 </router-link>
               </li>
@@ -49,7 +45,17 @@
           <li class="nav-item col" v-for="(link, id) in navbar" :key="id">
             <router-link class="nav-link" :to="link.path">
               <i :class="link.iconClass"></i>
-              {{ link.title }}
+              <span
+                class="position-relative"
+                v-if="totalCountProducts > 0 && link.title === ' Корзина'"
+                ><span class="position-absolute shop-card__count-products"
+                  >{{ totalCountProducts }}
+                </span>
+                <span class="ms-3"
+                  >{{ (+totalPrice).toLocaleString() }} ₽
+                </span>
+              </span>
+              <span v-else>{{ link.title }}</span>
             </router-link>
           </li>
         </ul>
@@ -66,6 +72,14 @@ export default {
       this.$router.push(`/catalog/${nameUrl}`).catch(() => {})
     }
   },
+  computed: {
+    totalCountProducts () {
+      return this.$store.getters.getTotalCountProducts
+    },
+    totalPrice () {
+      return this.$store.getters.getTotalPrice
+    }
+  },
   data () {
     return {
       navbar: [
@@ -76,7 +90,7 @@ export default {
         },
         {
           iconClass: 'fas fa-shopping-cart',
-          path: '/shopping-cart',
+          path: '/orders',
           title: ' Корзина'
         },
         {
@@ -109,6 +123,19 @@ export default {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   &-width {
     width: 95%;
+  }
+}
+.shop-card {
+  &__count-products {
+    left: -12px;
+    background-color: #00913b;
+    border-radius: 1rem;
+    padding: 0px;
+    width: 20px;
+    height: 20px;
+    top: -9px;
+    font-size: 12px;
+    line-height: 1.25rem;
   }
 }
 //   &__title {

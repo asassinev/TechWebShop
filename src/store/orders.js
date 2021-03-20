@@ -4,7 +4,21 @@ export default {
   },
   mutations: {
     setOrder (state, payload) {
-      state.orders.push(payload)
+      var isBuying = false
+      state.orders.forEach(e => {
+        if (e.name === payload.name) {
+          isBuying = true
+        }
+      })
+      if (isBuying) {
+        state.orders.forEach(e => {
+          if (e.name === payload.name) {
+            e.count++
+          }
+        })
+      } else {
+        state.orders.push(payload)
+      }
       localStorage.setItem('orders', JSON.stringify(state.orders))
     },
     setOrders (state, payload) {

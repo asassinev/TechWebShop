@@ -38,7 +38,7 @@ export default new VueRouter({
       component: Contacts
     },
     {
-      path: '/shopping-cart',
+      path: '/orders',
       component: ShopCard
     },
     {
