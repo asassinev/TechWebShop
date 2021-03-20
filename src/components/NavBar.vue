@@ -48,7 +48,8 @@
               <span
                 class="position-relative"
                 v-if="totalCountProducts > 0 && link.title === ' Корзина'"
-                ><span class="position-absolute shop-card__count-products"
+                ><span
+                  class="position-absolute shop-card__count-products bg-secondary"
                   >{{ totalCountProducts }}
                 </span>
                 <span class="ms-3"
@@ -128,7 +129,6 @@ export default {
 .shop-card {
   &__count-products {
     left: -12px;
-    background-color: #00913b;
     border-radius: 1rem;
     padding: 0px;
     width: 20px;

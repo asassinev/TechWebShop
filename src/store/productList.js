@@ -6,21 +6,10 @@ export default {
   },
   mutations: {
     setList (state, payload) {
-      payload.forEach(e => {
-        e.isBuying = false
-      })
       state.list = payload
     }
   },
   actions: {
-    setBuyingProduct ({ state }, payload) {
-      state.list.forEach(e => {
-        if (e.name === payload) {
-          e.isBuying = true
-        }
-      })
-      console.log(state.list)
-    },
     async fetchList ({ commit }, payload) {
       commit('setLoading', true)
       await axios({

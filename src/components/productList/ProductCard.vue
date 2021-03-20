@@ -19,12 +19,7 @@
           <span class="list__price float-start fw-bold"
             >Цена: {{ product.price }} <i class="fas fa-ruble-sign"></i
           ></span>
-          <button
-            class="btn btn-primary float-end"
-            @click="addToOrder(product)"
-          >
-            Купить
-          </button>
+          <BuyProductBTN :product="product" />
         </div>
       </div>
     </div>
@@ -32,7 +27,9 @@
 </template>
 
 <script>
+import BuyProductBTN from '../shared/BuyProductBTN.vue'
 export default {
+  components: { BuyProductBTN },
   props: ['product'],
   methods: {
     addToOrder (product) {

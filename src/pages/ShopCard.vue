@@ -56,7 +56,9 @@
                 ₽ / шт.
               </p>
             </div>
-            <p class="mt-3 fw-bold">{{ (+order.total).toLocaleString() }} ₽</p>
+            <p class="mt-3 fw-bold">
+              {{ (+order.totalPrice).toLocaleString() }} ₽
+            </p>
           </div>
         </div>
       </div>

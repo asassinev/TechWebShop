@@ -4,27 +4,23 @@
       <Loader />
     </div>
     <div v-else>
-      <h1 class="fs-3">{{ productInfo.name }}</h1>
-      <h3 class="fs-5">ID: {{ productInfo._id }}</h3>
+      <h1 class="fs-3">{{ product.name }}</h1>
+      <h3 class="fs-5">ID: {{ product._id }}</h3>
       <div class="shadow-sm mb-3 bg-white rounded border">
         <div class="row pt-3 pb-3">
           <div class="col-12 col-md-3 text-center">
-            <img
-              class="mx-auto"
-              :src="productInfo.imgSrc"
-              :alt="productInfo.name"
-            />
+            <img class="mx-auto" :src="product.imgSrc" :alt="product.name" />
           </div>
           <div class="col-12 col-md-9 px-4 container">
             <p class="fs-4 fw-bold">
-              {{ productInfo.price }}
+              {{ product.price }}
               <i class="list__price-gray fas fa-ruble-sign fs-5"></i>
             </p>
             <v-rating readonly :length="5" :value="generalRating"></v-rating>
             <p class="mb-0">Оценка товара: {{ generalRating || 0 }} из 5</p>
             <p class="mb-0">Голосов: {{ countRating || 0 }}</p>
             <p class="mb-2">Количество на складе: 2 шт.</p>
-            <button class="btn btn-primary">Купить</button>
+            <BuyProductBTN class="float-start" :product="product" />
           </div>
         </div>
       </div>
@@ -54,7 +50,11 @@
 </template>
 
 <script>
+import BuyProductBTN from '../shared/BuyProductBTN.vue'
 export default {
+  components: {
+    BuyProductBTN
+  },
   data () {
     return {
       tablist: [
@@ -80,7 +80,7 @@ export default {
     this.$store.dispatch('fetchProduct', this.$route.params.idProduct)
   },
   computed: {
-    productInfo () {
+    product () {
       return this.$store.getters.getProduct
     },
     loading () {
