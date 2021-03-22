@@ -24,7 +24,7 @@
                 Удалить
               </button>
             </div>
-            <div class="order__counter rounded mt-3">
+            <div class="order__counter rounded">
               <button
                 class="border rounded-start"
                 @click="
@@ -56,9 +56,7 @@
                 ₽ / шт.
               </p>
             </div>
-            <p class="mt-3 fw-bold">
-              {{ (+order.totalPrice).toLocaleString() }} ₽
-            </p>
+            <p class="fw-bold">{{ (+order.totalPrice).toLocaleString() }} ₽</p>
           </div>
         </div>
       </div>
@@ -443,6 +441,12 @@ export default {
     font-size: 14px;
     margin-left: 30px;
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__btn {
+    width: fit-content;
   }
   &__counter {
     margin: 0 auto;

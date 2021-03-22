@@ -4,21 +4,7 @@ export default {
   },
   mutations: {
     setOrder (state, payload) {
-      var isBuying = false
-      state.orders.forEach(e => {
-        if (e.name === payload.name) {
-          isBuying = true
-        }
-      })
-      if (isBuying) {
-        state.orders.forEach(e => {
-          if (e.name === payload.name) {
-            e.count++
-          }
-        })
-      } else {
-        state.orders.push(payload)
-      }
+      state.orders.push(payload)
       localStorage.setItem('orders', JSON.stringify(state.orders))
     },
     setOrders (state, payload) {
@@ -34,6 +20,15 @@ export default {
     addOrders ({ commit }, payload) {
       commit('setOrders', JSON.parse(payload))
     },
+    deleteOrder ({ state, commit }, payload) {
+      delete state.orders[payload]
+      let newOrders = []
+      newOrders = state.orders.filter(e => {
+        return e !== undefined
+      })
+      commit('setOrders', newOrders)
+      localStorage.setItem('orders', JSON.stringify(newOrders))
+    },
     changeProductQuantity ({ dispatch, commit, getters }, payload) {
       const orders = getters.getOrders
       orders[payload.id].count += payload.value
@@ -47,15 +42,6 @@ export default {
       } else {
         localStorage.setItem('orders', JSON.stringify(orders))
       }
-    },
-    deleteOrder ({ state, commit }, payload) {
-      delete state.orders[payload]
-      let newOrders = []
-      newOrders = state.orders.filter(e => {
-        return e !== undefined
-      })
-      commit('setOrders', newOrders)
-      localStorage.setItem('orders', JSON.stringify(newOrders))
     }
   },
   getters: {
