@@ -38,5 +38,13 @@ html,
 body {
   height: 100%;
   background-color: #f6f6f6 !important;
+  font-family: 'Segoe UI' !important;
+}
+
+.fs-7 {
+  font-size: 14px;
+}
+.fs-8 {
+  font-size: 12px;
 }
 </style>
