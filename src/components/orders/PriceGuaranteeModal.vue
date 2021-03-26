@@ -322,9 +322,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon-delete {
-  font-size: 14px;
-}
 .p-counter {
   padding: 2px 8px;
 }
