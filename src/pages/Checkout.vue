@@ -4,7 +4,7 @@
     <div class="col-12 col-lg-8">
       <div>
         <section>
-          <span class="bg-white p-1 px-2 me-3 ms-1 rounded-circle">1</span
+          <span class="bg-white p-counter me-3 rounded-circle">1</span
           ><span class="fs-5 fw-bold">Данные покупателя</span>
           <div class="section-border ms-lg-3 ps-lg-4 mt-2">
             <div class="d-flex">
@@ -79,7 +79,7 @@
           </div>
         </section>
         <section>
-          <span class="bg-white p-1 px-2 me-3 ms-1 rounded-circle">2</span
+          <span class="bg-white p-counter me-3 rounded-circle">2</span
           ><span class="fs-5 fw-bold">Выберите способ получения</span>
           <div class="border-lg-start ms-lg-3 ps-lg-4 mt-2">
             <div class="d-flex">
@@ -105,23 +105,24 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
+                  id="UserName"
+                  placeholder="Фамилия получателя"
                 />
-                <label for="floatingInput">Фамилия получателя</label>
+                <label for="UserName">Фамилия получателя</label>
               </div>
               <div class="form-floating mb-3">
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
+                  id="street"
+                  placeholder="Улица, дом, квартира*"
+                  v-model="street"
                 />
-                <label for="floatingPassword">Улица, дом, квартира*</label>
+                <label for="street">Улица, дом, квартира*</label>
               </div>
               <div>
                 <div
-                  class="d-flex rounded justify-content-between bg-light border p-2"
+                  class="d-flex rounded justify-content-between bg-white border p-2"
                 >
                   <div
                     class="form-check d-flex align-items-center ms-2"
@@ -131,6 +132,7 @@
                       class="form-check-input me-2"
                       type="checkbox"
                       v-model="needHelp"
+                      :disabled="street === '' ? true : false"
                       id="needHelp"
                     />
                     <label
@@ -156,7 +158,7 @@
                   </div>
                 </div>
                 <div
-                  class="rounded border bg-light p-1 ps-2 mt-2"
+                  class="rounded border bg-white p-1 ps-2 mt-2"
                   v-if="needHelp"
                 >
                   <div
@@ -239,7 +241,7 @@
           </div>
         </section>
         <section class="pt-3">
-          <span class="bg-white p-1 px-2 me-3 ms-1 rounded-circle">3</span
+          <span class="bg-white p-counter me-3 rounded-circle">3</span
           ><span class="fs-5 fw-bold">Выберите способ оплаты</span>
           <div class="ms-lg-3 ps-lg-4 mt-2">
             <div class="d-flex">
@@ -262,7 +264,7 @@
                 :class="{ 'bg-white shadow-sm': payment === 'online' }"
                 @click="
                   payment = 'online'
-                  paymentMethod = 'Банковская карта'
+                  paymentMethod = 'bank-card'
                 "
               >
                 Онлайн
@@ -293,10 +295,10 @@
                     class="form-check-input"
                     type="radio"
                     v-model="paymentMethod"
-                    id="Банковская карта"
-                    value="Банковская карта"
+                    id="bank-card"
+                    value="bank-card"
                   />
-                  <label class="form-check-label" for="Банковская карта">
+                  <label class="form-check-label" for="bank-card">
                     Банковская карта
                   </label>
                 </div>
@@ -347,7 +349,7 @@
           </div>
         </section>
       </div>
-      <div class="ms-4 ps-3 pt-4">
+      <div class="pt-3">
         <button class="btn btn-lg btn-primary">Подтвердить заказ</button>
         <p class="mt-3 fs-7 mb-1">
           Подтверждая заказ, Вы соглашаетесь с условиями
@@ -381,6 +383,7 @@
 <script>
 import Vue from 'vue'
 import calendar from '../components/checkout/calendar.vue'
+
 export default {
   components: { calendar },
   data () {
@@ -394,7 +397,8 @@ export default {
       comment: '',
       addComment: false,
       payment: 'payment on delivery',
-      paymentMethod: 'cash'
+      paymentMethod: 'cash',
+      street: ''
     }
   }
 }

@@ -5,8 +5,8 @@
       <button
         type="button"
         class="btn btn-primary mt-1 px-4"
-        data-mdb-toggle="modal"
-        data-mdb-target="#exampleModal"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
       >
         Написать отзыв
       </button>

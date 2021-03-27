@@ -41,7 +41,7 @@
             <a
               @click="changeIcon(id, review.comments.length)"
               :id="id"
-              data-mdb-toggle="collapse"
+              data-bs-toggle="collapse"
               :href="'#collapseExample' + id"
               role="button"
               aria-expanded="false"

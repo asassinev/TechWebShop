@@ -3,8 +3,8 @@
     <div
       type="button"
       class="p-3 d-flex justify-content-between fs-7"
-      data-mdb-toggle="modal"
-      data-mdb-target="#staticBackdrop"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
     >
       Нашли дешевле? Снизим цену
       <span class="b"><i class="fas fa-chevron-right"></i></span>
@@ -12,7 +12,7 @@
     <div
       class="modal fade"
       id="staticBackdrop"
-      data-mdb-keyboard="false"
+      data-bs-keyboard="false"
       tabindex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
@@ -26,7 +26,7 @@
             <button
               type="button"
               class="btn-close"
-              data-mdb-dismiss="modal"
+              data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
@@ -55,8 +55,8 @@
                 class="text-primary"
                 style="border-bottom: 1px dotted #1266f1; width: fit-content"
                 type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#termOfAction"
+                data-bs-toggle="collapse"
+                data-bs-target="#termOfAction"
                 aria-expanded="false"
                 aria-controls="termOfAction"
               >
@@ -252,7 +252,7 @@
             <button
               type="button"
               class="btn btn-secondary"
-              data-mdb-dismiss="modal"
+              data-bs-dismiss="modal"
               @click="clearModal"
             >
               Отменить
@@ -321,7 +321,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .p-counter {
   padding: 2px 8px;
 }

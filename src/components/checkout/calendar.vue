@@ -14,7 +14,7 @@
             class="calendar__day rounded-3"
             v-for="(day, index) in week"
             :key="index"
-            @click="changeDate(day)"
+            @click="checkedDate(day)"
             :class="{
               'calendar__active bg-primary text-white':
                 day.checked === true && day.price !== '',
@@ -59,7 +59,8 @@ export default {
       var dlast = new Date(this.year, this.month + 1, 0).getDate()
       var counterDay = 0
       var price = ''
-      for (let i = this.cDay; i <= this.cDay + 14; i++) {
+      var dayWeek = new Date(this.year, this.month, this.cDay).getDay()
+      for (let i = this.cDay - dayWeek + 1; i <= this.cDay + 14; i++) {
         if (counterDay === 1) {
           price = 'от 450 р.'
         }
@@ -69,7 +70,10 @@ export default {
         if (counterDay > 9) {
           price = ''
         }
-        if (
+        if (dayWeek > 1) {
+          dayWeek--
+          this.days[week].push({ index: i, price: '' })
+        } else if (
           new Date(this.year, this.month, i).getDay() !== this.dFirstMonth ||
           counterDay === 0
         ) {
@@ -106,7 +110,7 @@ export default {
         }
       }
     },
-    changeDate (day) {
+    checkedDate (day) {
       if (day.price !== '') {
         this.days.forEach(w => {
           w.forEach(d => {

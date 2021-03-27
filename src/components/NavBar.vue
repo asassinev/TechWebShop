@@ -7,8 +7,8 @@
       <button
         class="navbar-toggler"
         type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#navbarNav"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
@@ -22,7 +22,7 @@
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink"
               role="button"
-              data-mdb-toggle="dropdown"
+              data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               Каталог

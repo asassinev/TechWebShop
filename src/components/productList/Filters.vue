@@ -11,8 +11,8 @@
       <button
         class="btn filters__button w-100 text-start"
         type="button"
-        data-mdb-toggle="collapse"
-        :data-mdb-target="filter.id"
+        data-bs-toggle="collapse"
+        :data-bs-target="filter.id"
         aria-expanded="false"
         :aria-controls="filter.ariaControl"
       >

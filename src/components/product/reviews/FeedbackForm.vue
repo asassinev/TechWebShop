@@ -15,7 +15,7 @@
           <button
             type="button"
             class="btn-close"
-            data-mdb-dismiss="modal"
+            data-bs-dismiss="modal"
             aria-label="Close"
           ></button>
         </div>
@@ -130,7 +130,7 @@
           <button
             type="button"
             class="btn btn-secondary"
-            data-mdb-dismiss="modal"
+            data-bs-dismiss="modal"
           >
             Закрыть
           </button>

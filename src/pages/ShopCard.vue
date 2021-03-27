@@ -157,7 +157,7 @@ export default {
       border-top: 1px solid #e0e0e0;
       border-bottom: 1px solid #e0e0e0;
       max-width: 24px;
-      padding: 5px 14px 4px;
+      padding: 4px 14px;
     }
   }
   &__img {
