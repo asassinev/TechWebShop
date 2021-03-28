@@ -8,7 +8,7 @@ class User {
     firstName = '',
     secondName = '',
     sex = 'Не выбрано',
-    date = null
+    date
   ) {
     this._id = _id
     this.email = email
@@ -34,7 +34,7 @@ export default {
       await axios({
         method: 'post',
         url: 'http://localhost:8000/create-user',
-        data: new User(email, password)
+        data: new User(null, email, password)
       })
         .then(response => {
           console.log(response)
