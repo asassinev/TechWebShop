@@ -28,9 +28,15 @@
             <div class="d-flex mt-3 pb-3 w-100" v-if="person === 'individual'">
               <div class="form-floating me-3 w-100">
                 <input
+                  @input="$v.phone.$touch()"
+                  @blur="$v.phone.$touch()"
+                  class="form-control"
+                  :class="{
+                    'is-invalid': phoneErrors[0],
+                    'is-valid': phoneErrors.length < 1 && phone !== null
+                  }"
                   type="tel"
                   v-model="phone"
-                  class="form-control"
                   id="phone"
                   placeholder="tel"
                   v-phone
@@ -39,10 +45,17 @@
               </div>
               <div class="form-floating w-100">
                 <input
+                  @input="$v.email.$touch()"
+                  @blur="$v.email.$touch()"
                   type="email"
                   class="form-control"
+                  :class="{
+                    'is-invalid': emailErrors[0],
+                    'is-valid': emailErrors.length < 1
+                  }"
                   id="floatingInput"
                   placeholder="name@example.com"
+                  v-model="email"
                 />
                 <label for="floatingInput">Email</label>
               </div>
@@ -382,8 +395,14 @@
 
 <script>
 import calendar from '../components/checkout/calendar.vue'
-
+import { validationMixin } from 'vuelidate'
+import { email, helpers } from 'vuelidate/lib/validators'
+const phone = helpers.regex(
+  'phone',
+  /(\d{0,1})((\d{0,3}))(\d{0,3})-(\d{0,2})()|(-)(\d{0,2})/
+)
 export default {
+  mixins: [validationMixin],
   components: { calendar },
   data () {
     return {
@@ -392,12 +411,39 @@ export default {
       needHelp: false,
       haveElevator: false,
       phone: '',
+      email: '',
       coords: [55.775884925102, 37.660173979297845],
       comment: '',
       addComment: false,
       payment: 'payment on delivery',
       paymentMethod: 'cash',
       street: ''
+    }
+  },
+  created () {
+    this.phone = this.$store.getters.getUs.phone
+    this.email = this.$store.getters.getUs.email
+  },
+  validations: {
+    email: {
+      email
+    },
+    phone: {
+      phone
+    }
+  },
+  computed: {
+    emailErrors () {
+      const errors = []
+      if (!this.$v.email.$dirty) return errors
+      !this.$v.email.email && errors.push('Must be valid e-mail')
+      return errors
+    },
+    phoneErrors () {
+      const errors = []
+      if (!this.$v.phone.$dirty) return errors
+      !this.$v.phone.phone && errors.push('Must be valid phone')
+      return errors
     }
   }
 }
