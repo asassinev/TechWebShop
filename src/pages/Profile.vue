@@ -182,7 +182,9 @@ export default {
   },
   watch: {
     phone () {
-      this.phone = this.phone.substring(0, 18)
+      if (this.phone !== null && this.phone !== '') {
+        this.phone = this.phone.substring(0, 18)
+      }
       if (this.phone === '+') {
         this.phone = ''
       }
