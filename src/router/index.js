@@ -44,7 +44,7 @@ export default new VueRouter({
     {
       path: '/profile',
       component: Profile,
-      beforeEnter: authGuard
+      beforeEnter: authGuard.profile
     },
     {
       path: '/checkout',
@@ -52,11 +52,13 @@ export default new VueRouter({
     },
     {
       path: '/login',
-      component: Login
+      component: Login,
+      beforeEnter: authGuard.login
     },
     {
       path: '/registration',
-      component: Registration
+      component: Registration,
+      beforeEnter: authGuard.login
     },
     {
       path: '/productList/:id',
