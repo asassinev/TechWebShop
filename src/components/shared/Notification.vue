@@ -1,21 +1,32 @@
 <template>
-  <transition name="slide">
-    <div v-if="notification" class="notification">
-      <p
-        class="notification__text rounded shadow-sm user-select-none"
-        :class="{
-          isError: notification.title === 'error',
-          isSuccess: notification.title === 'success'
-        }"
+  <div class="wrap">
+    <transition-group name="fade" mode="in-out">
+      <div
+        class="notification"
+        v-for="notify in notification"
+        :key="notify.text"
       >
-        {{ notification.text }}
-      </p>
-    </div>
-  </transition>
+        <p
+          class="notification__text rounded shadow-sm user-select-none"
+          :class="{
+            isError: notify.title === 'error',
+            isSuccess: notify.title === 'success'
+          }"
+        >
+          {{ notify.text }}
+        </p>
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      show: true
+    }
+  },
   computed: {
     notification () {
       return this.$store.getters.getNotification
@@ -25,12 +36,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.notification {
-  width: 100%;
+.wrap {
   position: fixed;
-  bottom: 0;
-  transform: translate(0, -30px);
-  animation-fill-mode: forwards;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+.notification {
+  margin-top: 20px;
   &__text {
     color: white;
     padding: 14px;
@@ -47,18 +60,18 @@ export default {
   border-left: 4px solid #42a85f;
   background: #68cd86;
 }
-.slide-enter-active {
-  animation: slide-in 0.5s;
+.fade-enter-active {
+  animation: fade;
 }
-.slide-leave-active {
-  animation: slide-in 0.5s reverse;
+.fade-leave-active {
+  animation: fd 0.5s;
 }
-@keyframes slide-in {
-  0% {
-    transform: translate(0, 50px);
-  }
-  100% {
-    transform: translate(0, -30px);
-  }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
