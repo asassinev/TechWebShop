@@ -30,27 +30,33 @@ export default {
     }
   },
   actions: {
-    async createUser ({ commit }, { email, password }) {
+    async createUser ({ commit, dispatch }, { email, password }) {
       await axios({
         method: 'post',
         url: 'http://localhost:8000/create-user',
         data: new User(null, email, password)
       })
         .then(response => {
-          console.log(response)
+          dispatch('loginUser', { email: email, password: password })
+          commit('addNotification', {
+            title: 'success',
+            text: response.data.status
+          })
         })
         .catch(error => {
-          console.log(error)
+          commit('addNotification', {
+            title: 'error',
+            text: error.response.data.error
+          })
         })
     },
-    async loginUser ({ commit, getters, dispatch }, { email, password }) {
+    async loginUser ({ commit, getters }, { email, password }) {
       commit('setLoading', true)
       await axios({
         method: 'get',
         url: 'http://localhost:8000/login-user/' + email + '/' + password
       })
         .then(response => {
-          commit('setNotification', null)
           commit(
             'setUser',
             new User(
@@ -63,14 +69,12 @@ export default {
             )
           )
           localStorage.setItem('user', JSON.stringify(getters.getUs))
-          console.log(localStorage.getItem('user'))
         })
         .catch(error => {
-          dispatch('setNotification', {
+          commit('addNotification', {
             title: 'error',
-            text: 'Username or password is incorrect'
+            text: error.response.data.error
           })
-          console.log(error)
         })
       commit('setLoading', false)
     },
@@ -85,7 +89,10 @@ export default {
         data: payload
       })
         .then(response => {
-          console.log(response)
+          commit('addNotification', {
+            title: 'success',
+            text: response.data.status
+          })
           localStorage.removeItem('user')
           localStorage.setItem('user', JSON.stringify(payload))
         })
