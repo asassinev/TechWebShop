@@ -5,18 +5,20 @@ class User {
     _id = null,
     email,
     password,
+    phone = null,
     firstName = '',
     secondName = '',
     sex = 'Не выбрано',
-    date
+    date = new Date().toLocaleString()
   ) {
     this._id = _id
     this.email = email
     this.password = password
+    this.phone = phone
     this.firstName = firstName
     this.secondName = secondName
     this.sex = sex
-    this.date = new Date().toLocaleString()
+    this.date = date
   }
 }
 
@@ -63,9 +65,11 @@ export default {
               response.data._id,
               response.data.email,
               response.data.password,
+              response.data.phone,
               response.data.firstName,
               response.data.secondName,
-              response.data.sex
+              response.data.sex,
+              response.data.date
             )
           )
           localStorage.setItem('user', JSON.stringify(getters.getUs))
