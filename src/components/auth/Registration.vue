@@ -108,7 +108,6 @@ export default {
   },
   watch: {
     User () {
-      console.log(this.User)
       this.$router.push('/profile')
     }
   },
