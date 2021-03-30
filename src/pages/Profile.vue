@@ -41,10 +41,7 @@
           autocomplete="off"
         />
         <label for="phone">Телефон</label>
-        <div
-          v-if="phoneErrors[0]"
-          :class="{ 'invalid-feedback': phoneErrors[0] }"
-        >
+        <div :class="{ 'invalid-feedback': phoneErrors[0] }">
           {{ phoneErrors[0] }}
         </div>
       </div>
@@ -180,16 +177,6 @@ export default {
       phone: ''
     }
   },
-  watch: {
-    phone () {
-      if (this.phone !== null && this.phone !== '') {
-        this.phone = this.phone.substring(0, 18)
-      }
-      if (this.phone === '+') {
-        this.phone = ''
-      }
-    }
-  },
   created () {
     this.email = this.user.email
     this.phone = this.user.phone
@@ -203,6 +190,16 @@ export default {
     },
     phone: {
       phone
+    }
+  },
+  watch: {
+    phone () {
+      if (this.phone !== null && this.phone !== '') {
+        this.phone = this.phone.substring(0, 18)
+      }
+      if (this.phone === '+') {
+        this.phone = ''
+      }
     }
   },
   mounted () {
