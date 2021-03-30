@@ -117,6 +117,7 @@ export default {
             if (d !== '') {
               if (d.index === day.index) {
                 d.checked = true
+                this.$store.commit('setDeliveryDate', d)
               } else {
                 d.checked = false
               }
