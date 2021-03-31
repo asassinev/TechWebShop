@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['uName'],
+  props: ['uName', 'reviewId'],
   data () {
     return {
       comment: ''
@@ -24,8 +24,13 @@ export default {
   },
   methods: {
     sendComment () {
-      var payload = { comment: this.comment, uName: this.uName }
+      var payload = {
+        comment: this.comment,
+        uName: this.uName,
+        reviewId: this.reviewId
+      }
       this.$store.dispatch('createComment', payload)
+      this.comment = ''
     }
   }
 }
