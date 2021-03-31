@@ -1,11 +1,7 @@
 <template>
   <div class="wrap">
     <transition-group name="fade" mode="in-out">
-      <div
-        class="notification"
-        v-for="notify in notification"
-        :key="notify.text"
-      >
+      <div class="notification" v-for="notify in notification" :key="notify.id">
         <p
           class="notification__text rounded shadow-sm user-select-none"
           :class="{

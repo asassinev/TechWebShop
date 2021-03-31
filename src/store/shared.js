@@ -15,7 +15,11 @@ export default {
       state.notification = payload
     },
     addNotification (state, payload) {
-      state.notification.splice(state.notification.length, 1, payload)
+      state.notification.splice(state.notification.length, 1, {
+        text: payload.text,
+        title: payload.title,
+        id: Math.random()
+      })
       setTimeout(() => {
         state.notification.splice(0, 1)
       }, 2000)
