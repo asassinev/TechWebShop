@@ -266,6 +266,7 @@ export default {
         checkout.deliveryData = this.deliveryData
       }
       checkout.paymentMethod = this.paymentMethod
+      this.$store.dispatch('sendOrder', checkout)
     },
     isDisabled () {
       if (this.person === 'individual') {

@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export default {
   state: {
     phone: '',
@@ -33,7 +35,30 @@ export default {
       state.delivery.deliveryDate = payload
     }
   },
-  actions: {},
+  actions: {
+    async sendOrder ({ getters, commit }, payload) {
+      const orders = {
+        checkout: payload,
+        orders: getters.getOrders
+      }
+      await axios
+        .post('http://localhost:8000/create-order', orders)
+        .then(response => {
+          commit('addNotification', {
+            title: 'success',
+            text: response.data.status
+          })
+          localStorage.removeItem('orders')
+          commit('setOrders', [])
+        })
+        .catch(error => {
+          commit('addNotification', {
+            title: 'error',
+            text: error.response.data.error
+          })
+        })
+    }
+  },
   getters: {
     getPhone (state) {
       return state.phone
