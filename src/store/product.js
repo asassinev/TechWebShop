@@ -68,13 +68,10 @@ export default {
     }
   },
   actions: {
-    async fetchProduct ({ commit, getters }, payload) {
-      const newUrl = 'http://localhost:8000/productInfo/' + payload
+    async fetchProduct ({ commit }, payload) {
       commit('setLoading', true)
-      await axios({
-        method: 'get',
-        url: newUrl
-      })
+      await axios
+        .get('http://localhost:8000/productInfo/' + payload)
         .then(response => {
           commit('setProduct', response.data)
           commit('setReviews', response.data.reviews)
@@ -88,7 +85,7 @@ export default {
     async changeCountLike ({ commit }, payload) {
       console.log('changed')
     },
-    async createReview ({ getters }, payload) {
+    async createReview ({ getters, dispatch }, payload) {
       if (!getters.getUs) {
         payload.uName = 'Гость'
       } else if (getters.getUs.firstName || getters.getUs.secondName) {
@@ -101,40 +98,44 @@ export default {
             .replace('0.', ' ')
             .trim()
       }
-      const newUrl =
-        'http://localhost:8000/create-review/' + getters.getProductId
-      await axios({
-        method: 'post',
-        url: newUrl,
-        data: payload
-      })
+      await axios
+        .post(
+          'http://localhost:8000/create-review/' + getters.getProductId,
+          payload
+        )
         .then(response => {
-          console.log(response)
-          this.fetchProduct(getters.getProductId)
+          dispatch('fetchProduct', getters.getProductId)
         })
         .catch(error => {
           console.log(error)
         })
     },
-    async createComment ({ getters }, payload) {
-      var uName = getters.user
-      if (!uName) {
-        uName = 'Гость'
+    async createComment ({ getters, dispatch }, payload) {
+      var uReviewName = ''
+      if (!getters.getUs) {
+        uReviewName = 'Гость'
+      } else if (getters.getUs.firstName || getters.getUs.secondName) {
+        uReviewName = getters.getUs.firstName + ' ' + getters.getUs.secondName
+      } else {
+        uReviewName =
+          'astronaut-' +
+          Math.random()
+            .toFixed(9)
+            .replace('0.', ' ')
+            .trim()
       }
-      console.log(payload.uName)
       var date = new Date().toLocaleString()
-      const newUrl =
-        'http://localhost:8000/create-comment/' +
-        getters.getProductId +
-        '/' +
-        payload.uName
-      axios({
-        method: 'post',
-        url: newUrl,
-        data: { uName: uName, date: date, comment: payload.comment }
-      })
+      await axios
+        .post('http://localhost:8000/create-comment/', {
+          id: getters.getProductId,
+          reviewId: payload.reviewId,
+          uName: payload.uName,
+          uReviewName: uReviewName,
+          date: date,
+          comment: payload.comment
+        })
         .then(response => {
-          console.log(response)
+          dispatch('fetchProduct', getters.getProductId)
         })
         .catch(error => {
           console.log(error)
@@ -147,6 +148,9 @@ export default {
     },
     getProductId (state) {
       return state.product._id
+    },
+    getProductName (state) {
+      return state.product.name
     },
     getCategories (state) {
       return state.product.categories
@@ -171,7 +175,7 @@ export default {
       })
       rating = rating / state.reviews.length
 
-      return rating
+      return rating.toFixed(1)
     },
     getCountReview (state) {
       return state.reviews.length

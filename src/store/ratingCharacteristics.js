@@ -11,11 +11,8 @@ export default {
   },
   actions: {
     async fetchRatingCharacteristics ({ commit }, payload) {
-      const newUrl = 'http://localhost:8000/getCharacteristics/' + payload
-      await axios({
-        method: 'get',
-        url: newUrl
-      })
+      await axios
+        .get('http://localhost:8000/getCharacteristics/' + payload)
         .then(response => {
           commit('setRatingCharacteristics', response.data)
         })

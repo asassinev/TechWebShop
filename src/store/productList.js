@@ -12,14 +12,8 @@ export default {
   actions: {
     async fetchList ({ commit }, payload) {
       commit('setLoading', true)
-      await axios({
-        method: 'get',
-        headers: { 'Access-Control-Allow-Origin': true },
-        url: 'http://localhost:8000/productList',
-        params: {
-          categories: payload
-        }
-      })
+      await axios
+        .get('http://localhost:8000/productList/' + payload)
         .then(response => {
           commit('setList', response.data)
         })
