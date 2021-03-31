@@ -177,7 +177,7 @@ export default {
           buildingFloor: this.buildingFloor,
           addComment: this.addComment,
           comment: this.comment,
-          isConfirm: this.isConfirm,
+          // isConfirm: this.isConfirm,
           deliveryDate: this.deliveryDate
         }
         this.$store.commit('setDelivery', delivery)
