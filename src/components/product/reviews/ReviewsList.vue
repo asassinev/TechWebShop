@@ -21,18 +21,24 @@
         </p>
       </div>
       <p><strong>Срок использования: </strong>{{ review.termOfUse }}</p>
-      <p><strong>Достоинства: </strong></p>
-      <p v-for="advantages in review.advantages" :key="advantages.id">
-        {{ advantages }}
-      </p>
-      <p><strong>Недостатки: </strong></p>
-      <p v-for="limitations in review.limitations" :key="limitations.id">
-        {{ limitations }}
-      </p>
-      <p><strong>Комментарий: </strong></p>
-      <p v-for="review in review.review" :key="review.id">
-        {{ review }}
-      </p>
+      <span v-if="review.advantages[0] !== ''">
+        <p><strong>Достоинства: </strong></p>
+        <p v-for="advantages in review.advantages" :key="advantages.id">
+          {{ advantages }}
+        </p>
+      </span>
+      <span v-if="review.limitations[0] !== ''">
+        <p><strong>Недостатки: </strong></p>
+        <p v-for="limitations in review.limitations" :key="limitations.id">
+          {{ limitations }}
+        </p>
+      </span>
+      <span v-if="review.review[0] !== ''">
+        <p><strong>Комментарий: </strong></p>
+        <p v-for="review in review.review" :key="review.id">
+          {{ review }}
+        </p>
+      </span>
       <div class="comments">
         <div class="row">
           <div
@@ -71,7 +77,7 @@
         </div>
         <div class="collapse ms-3" :id="'collapseExample' + id">
           <div class="mt-3">
-            <CommentForm :uName="review.uName" />
+            <CommentForm :uName="review.uName" :reviewId="review.id" />
             <CommentsList :comments="review.comments" />
           </div>
         </div>
