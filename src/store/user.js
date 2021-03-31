@@ -33,11 +33,11 @@ export default {
   },
   actions: {
     async createUser ({ commit, dispatch }, { email, password }) {
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/create-user',
-        data: new User(null, email, password)
-      })
+      await axios
+        .post(
+          'http://localhost:8000/create-user',
+          new User(null, email, password)
+        )
         .then(response => {
           dispatch('loginUser', { email: email, password: password })
           commit('addNotification', {
@@ -54,10 +54,11 @@ export default {
     },
     async loginUser ({ commit, getters }, { email, password }) {
       commit('setLoading', true)
-      await axios({
-        method: 'get',
-        url: 'http://localhost:8000/login-user/' + email + '/' + password
-      })
+      await axios
+        .post('http://localhost:8000/login-user', {
+          email: email,
+          password: password
+        })
         .then(response => {
           commit(
             'setUser',
@@ -87,11 +88,8 @@ export default {
       commit('setUser', null)
     },
     async changeUser ({ commit }, payload) {
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/change-user/',
-        data: payload
-      })
+      await axios
+        .post('http://localhost:8000/change-user/', payload)
         .then(response => {
           commit('addNotification', {
             title: 'success',
@@ -101,7 +99,26 @@ export default {
           localStorage.setItem('user', JSON.stringify(payload))
         })
         .catch(error => {
-          console.log(error)
+          commit('addNotification', {
+            title: 'error',
+            text: error.response.data.error
+          })
+        })
+    },
+    async changePassword ({ commit }, payload) {
+      await axios
+        .post('http://localhost:8000/change-user-password/', payload)
+        .then(response => {
+          commit('addNotification', {
+            title: 'success',
+            text: response.data.status
+          })
+        })
+        .catch(error => {
+          commit('addNotification', {
+            title: 'error',
+            text: error.response.data.error
+          })
         })
     }
   },
