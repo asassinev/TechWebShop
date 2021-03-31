@@ -2,14 +2,6 @@
   <div>
     <section v-if="countReview === 0">
       <p class="h5">Отзывов пока нет</p>
-      <button
-        type="button"
-        class="btn btn-primary mt-1 px-4"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Написать отзыв
-      </button>
       <FeedbackForm />
     </section>
     <section v-else>
