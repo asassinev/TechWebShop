@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './optionsAxois.js'
 
 export default {
   state: {
@@ -13,7 +13,7 @@ export default {
     async fetchList ({ commit }, payload) {
       commit('setLoading', true)
       await axios
-        .get('http://localhost:8000/productList/' + payload)
+        .get('productList/' + payload)
         .then(response => {
           commit('setList', response.data)
         })

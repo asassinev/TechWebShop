@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './optionsAxois.js'
 
 export default {
   state: {
@@ -71,7 +71,7 @@ export default {
     async fetchProduct ({ commit }, payload) {
       commit('setLoading', true)
       await axios
-        .get('http://localhost:8000/productInfo/' + payload)
+        .get('productInfo/' + payload)
         .then(response => {
           commit('setProduct', response.data)
           commit('setReviews', response.data.reviews)
@@ -99,10 +99,7 @@ export default {
             .trim()
       }
       await axios
-        .post(
-          'http://localhost:8000/create-review/' + getters.getProductId,
-          payload
-        )
+        .post('create-review/' + getters.getProductId, payload)
         .then(response => {
           dispatch('fetchProduct', getters.getProductId)
         })
@@ -126,7 +123,7 @@ export default {
       }
       var date = new Date().toLocaleString()
       await axios
-        .post('http://localhost:8000/create-comment/', {
+        .post('create-comment/', {
           id: getters.getProductId,
           reviewId: payload.reviewId,
           uName: payload.uName,

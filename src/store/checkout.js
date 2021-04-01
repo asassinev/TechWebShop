@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './optionsAxois.js'
 
 export default {
   state: {
@@ -42,7 +42,7 @@ export default {
         orders: getters.getOrders
       }
       await axios
-        .post('http://localhost:8000/create-order', orders)
+        .post('create-order', orders)
         .then(response => {
           commit('addNotification', {
             title: 'success',

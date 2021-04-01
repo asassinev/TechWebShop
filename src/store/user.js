@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './optionsAxois.js'
 
 class User {
   constructor (
@@ -34,10 +34,7 @@ export default {
   actions: {
     async createUser ({ commit, dispatch }, { email, password }) {
       await axios
-        .post(
-          'http://localhost:8000/create-user',
-          new User(null, email, password)
-        )
+        .post('create-user', new User(null, email, password))
         .then(response => {
           dispatch('loginUser', { email: email, password: password })
           commit('addNotification', {
@@ -55,7 +52,7 @@ export default {
     async loginUser ({ commit, getters }, { email, password }) {
       commit('setLoading', true)
       await axios
-        .post('http://localhost:8000/login-user', {
+        .post('login-user', {
           email: email,
           password: password
         })
@@ -89,7 +86,7 @@ export default {
     },
     async changeUser ({ commit }, payload) {
       await axios
-        .post('http://localhost:8000/change-user/', payload)
+        .post('change-user/', payload)
         .then(response => {
           commit('addNotification', {
             title: 'success',
@@ -107,7 +104,7 @@ export default {
     },
     async changePassword ({ commit }, payload) {
       await axios
-        .post('http://localhost:8000/change-user-password/', payload)
+        .post('change-user-password/', payload)
         .then(response => {
           commit('addNotification', {
             title: 'success',

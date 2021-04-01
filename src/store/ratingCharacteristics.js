@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './optionsAxois.js'
 
 export default {
   state: {
@@ -12,7 +12,7 @@ export default {
   actions: {
     async fetchRatingCharacteristics ({ commit }, payload) {
       await axios
-        .get('http://localhost:8000/getCharacteristics/' + payload)
+        .get('getCharacteristics/' + payload)
         .then(response => {
           commit('setRatingCharacteristics', response.data)
         })
