@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="'/productList/' + item.id"
+    :to="'/TechWebShop/productList/' + item.id"
     class="item-card shadow-sm p-3 bg-white rounded user-select-none"
   >
     <div class="item-card__img">

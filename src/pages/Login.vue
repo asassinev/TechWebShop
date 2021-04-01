@@ -64,7 +64,9 @@
           </button>
         </div>
         <div class="col-12 mt-4 text-center">
-          <router-link class="" to="/registration">Создать аккаунт</router-link>
+          <router-link class="" to="/TechWebShop/registration"
+            >Создать аккаунт</router-link
+          >
         </div>
       </div>
     </form>
@@ -104,7 +106,7 @@ export default {
   },
   watch: {
     isLogin () {
-      this.$router.push('/profile')
+      this.$router.push('/TechWebShop/profile')
     }
   },
   computed: {

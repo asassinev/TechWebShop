@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-end flex-wrap">
-        <router-link to="/login" class="pb-2 fs-7" @click="submit">
+        <router-link to="/TechWebShop/login" class="pb-2 fs-7" @click="submit">
           Использовать уже существущий аккаунт
         </router-link>
         <button type="button" class="btn btn-primary" @click="submit">
@@ -108,7 +108,7 @@ export default {
   },
   watch: {
     User () {
-      this.$router.push('/profile')
+      this.$router.push('/TechWebShop/profile')
     }
   },
   computed: {

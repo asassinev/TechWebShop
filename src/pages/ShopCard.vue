@@ -78,7 +78,10 @@
           <hr class="m-0" />
           <PriceGuaranteeModal />
         </div>
-        <router-link to="/checkout" class="mt-3 btn btn-success btn-lg w-100">
+        <router-link
+          to="/TechWebShop/checkout"
+          class="mt-3 btn btn-success btn-lg w-100"
+        >
           Оформить заказ
         </router-link>
       </div>

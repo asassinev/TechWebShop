@@ -3,12 +3,12 @@ const authGuard = {
     if (localStorage.getItem('user')) {
       next()
     } else {
-      next('/login?loginError=true')
+      next('/TechWebShop/login?loginError=true')
     }
   },
   login (to, from, next) {
     if (localStorage.getItem('user')) {
-      next('/profile')
+      next('/TechWebShop/profile')
     } else {
       next()
     }

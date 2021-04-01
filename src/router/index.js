@@ -21,50 +21,52 @@ import ProductReviews from '../components/product/ProductReviews'
 
 Vue.use(VueRouter)
 
+const BASE_URL = '/TechWebShop'
+
 export default new VueRouter({
   routes: [
     {
-      path: '/',
+      path: BASE_URL + '/',
       component: Home
     },
     {
-      path: '/catalog/:name',
+      path: BASE_URL + '/catalog/:name',
       name: 'catalog',
       component: Catalog
     },
     {
-      path: '/contacts',
+      path: BASE_URL + '/contacts',
       component: Contacts
     },
     {
-      path: '/orders',
+      path: BASE_URL + '/orders',
       component: ShopCard
     },
     {
-      path: '/profile',
+      path: BASE_URL + '/profile',
       component: Profile,
       beforeEnter: authGuard.profile
     },
     {
-      path: '/checkout',
+      path: BASE_URL + '/checkout',
       component: Checkout
     },
     {
-      path: '/login',
+      path: BASE_URL + '/login',
       component: Login,
       beforeEnter: authGuard.login
     },
     {
-      path: '/registration',
+      path: BASE_URL + '/registration',
       component: Registration,
       beforeEnter: authGuard.login
     },
     {
-      path: '/productList/:id',
+      path: BASE_URL + '/productList/:id',
       component: ProductList
     },
     {
-      path: '/product/:idProduct',
+      path: BASE_URL + '/product/:idProduct',
       component: ProductInformation,
       children: [
         {
@@ -85,7 +87,7 @@ export default new VueRouter({
       ]
     },
     {
-      path: '*',
+      path: BASE_URL + '*',
       component: Page404
     }
   ],

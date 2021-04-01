@@ -10,7 +10,7 @@
         <div>
           <router-link
             class="list__link text-decoration-none text-dark fw-bold"
-            :to="'/product/' + product._id + `/description`"
+            :to="'/TechWebShop/product/' + product._id + `/description`"
             >{{ product.name }}</router-link
           >
           <p class="mt-2 list__description">{{ product.titleDescription }}</p>

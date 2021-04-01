@@ -3,7 +3,9 @@
     class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top text-center"
   >
     <div class="container">
-      <router-link class="navbar-brand me-5" to="/">TECH</router-link>
+      <router-link class="navbar-brand me-5" to="/TechWebShop/"
+        >TECH</router-link
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -70,7 +72,7 @@ export default {
   methods: {
     setRouteParams (nameUrl) {
       this.$store.commit('setCategories', nameUrl)
-      this.$router.push(`/catalog/${nameUrl}`).catch(() => {})
+      this.$router.push(`/TechWebShop/catalog/${nameUrl}`).catch(() => {})
     }
   },
   computed: {
@@ -86,17 +88,17 @@ export default {
       navbar: [
         {
           iconClass: 'fas fa-phone-square-alt',
-          path: '/contacts',
+          path: '/TechWebShop/contacts',
           title: ' Контакты'
         },
         {
           iconClass: 'fas fa-shopping-cart',
-          path: '/orders',
+          path: '/TechWebShop/orders',
           title: ' Корзина'
         },
         {
           iconClass: 'fas fa-user-circle',
-          path: '/profile',
+          path: '/TechWebShop/profile',
           title: ' Профиль'
         }
       ],

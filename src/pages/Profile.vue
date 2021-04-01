@@ -235,7 +235,7 @@ export default {
   methods: {
     logoutUser () {
       this.$store.dispatch('logoutUser')
-      this.$router.push('/login')
+      this.$router.push('/TechWebShop/login')
     },
     changeUser () {
       this.$v.$touch()
