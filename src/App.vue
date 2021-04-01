@@ -25,6 +25,12 @@ export default {
     Notificaton
   },
   created () {
+    if (
+      localStorage.getItem('location') &&
+      localStorage.getItem('location') !== this.$route.path
+    ) {
+      this.$router.push(localStorage.getItem('location'))
+    }
     this.$store.commit('setUser', JSON.parse(localStorage.getItem('user')))
     if (localStorage.getItem('orders')) {
       this.$store.dispatch('addOrders', localStorage.getItem('orders'))
