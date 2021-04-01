@@ -18,7 +18,10 @@
             .join('/') +
           '/'
       )
-      localStorage.setItem('location', window.location.pathname)
+      localStorage.setItem(
+        'location',
+        window.location.pathname + window.location.search
+      )
     </script>
   </head>
   <body></body>
