@@ -18,8 +18,8 @@
         <span class="fas fa-bars"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav row container">
-          <li class="nav-item dropdown col">
+        <ul class="navbar-nav flex-fill">
+          <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink"
@@ -172,11 +172,6 @@ export default {
 // }
 
 .dropdown {
-  &-menu {
-    left: auto !important;
-    right: 43%;
-    transform: translateX(50%);
-  }
   &-item {
     cursor: pointer;
   }
