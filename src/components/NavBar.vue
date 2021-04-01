@@ -36,9 +36,12 @@
               <li
                 v-for="(link, id) in catalog"
                 :key="id"
-                @click="setRouteParams(link.name)"
+                @click="$store.commit('setCategories', link.name)"
               >
-                <router-link to="#" class="dropdown-item">
+                <router-link
+                  :to="'/TechWebShop/catalog/' + link.name"
+                  class="dropdown-item"
+                >
                   {{ link.title }}
                 </router-link>
               </li>
@@ -69,12 +72,6 @@
 
 <script>
 export default {
-  methods: {
-    setRouteParams (nameUrl) {
-      this.$store.commit('setCategories', nameUrl)
-      this.$router.push(`/TechWebShop/catalog/${nameUrl}`).catch(() => {})
-    }
-  },
   computed: {
     totalCountProducts () {
       return this.$store.getters.getTotalCountProducts

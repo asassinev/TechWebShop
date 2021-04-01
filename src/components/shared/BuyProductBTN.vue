@@ -1,6 +1,9 @@
 <template>
   <div>
-    <router-link v-if="isBuying" class="btn btn-success float-end" to="/orders"
+    <router-link
+      v-if="isBuying"
+      class="btn btn-success float-end"
+      to="/TechWebShop/orders"
       >В корзину</router-link
     >
     <button v-else class="btn btn-primary float-end" @click="addToOrder">
