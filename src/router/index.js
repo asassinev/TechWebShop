@@ -10,9 +10,8 @@ import ShopCard from '../pages/ShopCard'
 import Profile from '../pages/Profile'
 import Page404 from '../pages/Page404'
 import Checkout from '../pages/Checkout'
-
-import Login from '../components/auth/Login'
-import Registration from '../components/auth/Registration'
+import Login from '../pages/Login'
+import Registration from '../pages/Registration'
 
 import ProductList from '../components/productList/ProductList'
 import ProductInformation from '../components/product/ProductInformation'
