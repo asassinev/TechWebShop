@@ -11,9 +11,6 @@ export default {
     setError (state, payload) {
       state.error = payload
     },
-    setNotification (state, payload) {
-      state.notification = payload
-    },
     addNotification (state, payload) {
       state.notification.splice(state.notification.length, 1, {
         text: payload.text,

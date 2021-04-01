@@ -55,7 +55,7 @@ export default {
         title: 'success',
         text: 'Успешно добавлено в корзину'
       }
-      this.$store.dispatch('setNotification', notification)
+      this.$store.commit('addNotification', notification)
     }
   }
 }
