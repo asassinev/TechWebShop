@@ -2,18 +2,19 @@
   <div class="d-flex flex-wrap flex-sm-nowrap pb-3">
     <div class="form-floating w-100 me-0 me-sm-3 mb-3 mb-sm-0">
       <input
-        @input="$v.phone.$touch()"
+        @input="$v.newPhone.$touch()"
         @blur="
-          $v.phone.$touch()
-          $store.commit('setPhone', phone)
+          $v.newPhone.$touch()
+          $store.commit('setPhone', newPhone)
         "
         class="form-control"
         :class="{
           'is-invalid': phoneErrors[0],
-          'is-valid': phoneErrors.length < 1 && phone !== null && phone !== ''
+          'is-valid':
+            phoneErrors.length < 1 && newPhone !== null && newPhone !== ''
         }"
         type="tel"
-        v-model="phone"
+        v-model="newPhone"
         id="phone"
         placeholder="tel"
         v-phone
@@ -25,17 +26,17 @@
     </div>
     <div class="form-floating w-100">
       <input
-        @input="$v.email.$touch()"
-        @blur="$store.commit('setEmail', email)"
+        @input="$v.newEmail.$touch()"
+        @blur="$store.commit('setEmail', newEmail)"
         type="email"
         class="form-control"
         :class="{
           'is-invalid': emailErrors[0],
-          'is-valid': emailErrors.length < 1 && email !== ''
+          'is-valid': emailErrors.length < 1 && newEmail !== ''
         }"
         id="Email"
         placeholder="name@example.com"
-        v-model="email"
+        v-model="newEmail"
       />
       <label for="Email">Email</label>
       <div :class="{ 'invalid-feedback': emailErrors[0] }">
@@ -53,50 +54,49 @@ const phone = helpers.regex(
   /(\d{0,1})(\d{0,3})(\d{0,3})-(\d{0,2})-(\d\d)$/
 )
 export default {
+  props: ['phone', 'email'],
   mixins: [validationMixin],
   data () {
     return {
-      phone: '',
-      email: ''
+      newPhone: '',
+      newEmail: ''
     }
   },
   created () {
-    this.phone = this.$store.getters.getUs.phone
-    this.$store.commit('setPhone', this.phone)
-    this.email = this.$store.getters.getUs.email
-    this.$store.commit('setEmail', this.email)
+    this.newPhone = this.phone
+    this.newEmail = this.email
   },
   validations: {
-    email: {
+    newEmail: {
       email
     },
-    phone: {
+    newPhone: {
       required,
       phone
     }
   },
   watch: {
     phone () {
-      if (this.phone !== null && this.phone !== '') {
-        this.phone = this.phone.substring(0, 18)
+      if (this.newPhone !== null && this.newPhone !== '') {
+        this.newPhone = this.newPhone.substring(0, 18)
       }
-      if (this.phone === '+') {
-        this.phone = ''
+      if (this.newPhone === '+') {
+        this.newPhone = ''
       }
     }
   },
   computed: {
     emailErrors () {
       const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('Must be valid e-mail')
+      if (!this.$v.newEmail.$dirty) return errors
+      !this.$v.newEmail.email && errors.push('Must be valid e-mail')
       return errors
     },
     phoneErrors () {
       const errors = []
-      if (!this.$v.phone.$dirty) return errors
-      !this.$v.phone.required && errors.push('Phone is required')
-      !this.$v.phone.phone && errors.push('Must be valid phone')
+      if (!this.$v.newPhone.$dirty) return errors
+      !this.$v.newPhone.required && errors.push('Phone is required')
+      !this.$v.newPhone.phone && errors.push('Must be valid phone')
       return errors
     }
   }

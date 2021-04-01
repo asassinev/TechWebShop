@@ -25,7 +25,7 @@
             </div>
           </div>
           <section class="mt-3" v-if="person === 'individual'">
-            <individual-person-form />
+            <individual-person-form :phone="phone" :email="email" />
           </section>
           <section v-if="person === 'entity'" class="mt-3">
             <entity-person-form />
@@ -270,7 +270,7 @@ export default {
     },
     isDisabled () {
       if (this.person === 'individual') {
-        if (this.phone === '' && this.email === '') {
+        if (this.phone === '') {
           return true
         }
       } else {
