@@ -39,7 +39,7 @@
             .slice(1)
             .split('/')
             .slice(pathSegmentsToKeep)
-            .join('/')(l.search ? '&' + l.search.slice(1) : '') +
+            .join('/') +
           l.hash
       )
     </script>
