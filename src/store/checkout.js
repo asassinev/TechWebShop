@@ -42,7 +42,7 @@ export default {
         orders: getters.getOrders
       }
       await axios
-        .post('create-order', orders)
+        .post('create-order/', orders)
         .then(response => {
           commit('addNotification', {
             title: 'success',

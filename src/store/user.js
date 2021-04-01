@@ -34,7 +34,7 @@ export default {
   actions: {
     async createUser ({ commit, dispatch }, { email, password }) {
       await axios
-        .post('create-user', new User(null, email, password))
+        .post('create-user/', new User(null, email, password))
         .then(response => {
           dispatch('loginUser', { email: email, password: password })
           commit('addNotification', {
