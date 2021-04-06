@@ -8,6 +8,7 @@ import shared from './shared'
 import ratingCharacteristics from './ratingCharacteristics'
 import orders from './orders'
 import checkout from './checkout'
+import breadcrumb from './breadcrumb'
 
 Vue.use(Vuex)
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     shared,
     ratingCharacteristics,
     orders,
-    checkout
+    checkout,
+    breadcrumb
   }
 })

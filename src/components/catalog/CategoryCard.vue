@@ -1,20 +1,33 @@
 <template>
-  <router-link
-    :to="'/TechWebShop/productList/' + item.id"
-    class="item-card shadow-sm p-3 bg-white rounded user-select-none"
-  >
-    <div class="item-card__img">
-      <img :src="item.src" :alt="item.text" class="item-card__img-margin" />
-    </div>
-    <p class="item-card__text fw-bold fs-5 mb-2">
-      {{ item.text }}
-    </p>
-  </router-link>
+  <div @click="addProductListParams">
+    <router-link
+      :to="'/TechWebShop/productList/' + item.id"
+      class="item-card shadow-sm p-3 bg-white rounded user-select-none"
+    >
+      <div class="item-card__img">
+        <img :src="item.src" :alt="item.title" class="item-card__img-margin" />
+      </div>
+      <p class="item-card__text fw-bold fs-5 mb-2">
+        {{ item.title }}
+      </p>
+    </router-link>
+  </div>
 </template>
 
 <script>
 export default {
-  props: ['item']
+  props: ['item'],
+  methods: {
+    addProductListParams () {
+      localStorage.setItem(
+        'productList',
+        JSON.stringify({
+          path: this.item.id,
+          title: this.item.title
+        })
+      )
+    }
+  }
 }
 </script>
 

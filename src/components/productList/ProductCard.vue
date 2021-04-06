@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-10">
       <div class="list__body">
-        <div>
+        <div @click="addProduct">
           <router-link
             class="list__link text-decoration-none text-dark fw-bold"
             :to="'/TechWebShop/product/' + product._id + `/description`"
@@ -32,21 +32,14 @@ export default {
   components: { BuyProductBTN },
   props: ['product'],
   methods: {
-    addToOrder (product) {
-      const newProduct = {
-        _id: product._id,
-        imgSrc: product.imgSrc,
-        name: product.name,
-        count: 1,
-        price: product.price,
-        total: 0
-      }
-      this.$store.dispatch('addOrder', newProduct)
-      const notification = {
-        title: 'success',
-        text: 'Успешно добавлено в корзину'
-      }
-      this.$store.dispatch('setNotification', notification)
+    addProduct () {
+      localStorage.setItem(
+        'product',
+        JSON.stringify({
+          path: this.product._id + '/description',
+          title: this.product.name
+        })
+      )
     }
   }
 }

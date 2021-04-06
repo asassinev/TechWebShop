@@ -2,14 +2,7 @@
   <div>
     <NavBar />
     <div class="container">
-      <nav aria-label="breadcrumb" class="mt-3">
-        <ol class="breadcrumb text-decoration-none">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Library</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Data</li>
-        </ol>
-      </nav>
-      <hr />
+      <breadcrumb />
       <router-view />
     </div>
     <Notificaton />
@@ -17,21 +10,26 @@
 </template>
 
 <script>
+import Breadcrumb from './components/Breadcrumb'
 import NavBar from './components/NavBar'
 import Notificaton from './components/shared/Notification'
 export default {
   components: {
     NavBar,
-    Notificaton
+    Notificaton,
+    Breadcrumb
   },
   created () {
+    // redirection from 404 page for github pages
     if (
       localStorage.getItem('location') &&
       localStorage.getItem('location') !== this.$route.path
     ) {
       this.$router.push(localStorage.getItem('location'))
     }
+    //
     this.$store.commit('setUser', JSON.parse(localStorage.getItem('user')))
+
     if (localStorage.getItem('orders')) {
       this.$store.dispatch('addOrders', localStorage.getItem('orders'))
     }
