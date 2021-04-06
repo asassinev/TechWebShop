@@ -228,7 +228,13 @@ export default {
       paymentMethod: 'cash'
     }
   },
-
+  created () {
+    if (this.$store.getters.isUserLoggedIn) {
+      const user = this.$store.getters.getUs
+      this.$store.commit('setPhone', user.phone)
+      this.$store.commit('setEmail', user.email)
+    }
+  },
   computed: {
     INN () {
       return this.$store.getters.getINN
