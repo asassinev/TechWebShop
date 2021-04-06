@@ -6,16 +6,16 @@
     <div v-else class="row mt-3">
       <div class="col-md-6 col-12">
         <div class="input-group">
-          <span class="input-group-text" id="filter">Search</span>
+          <span class="input-group-text" id="search">Search</span>
           <input
             class="form-control"
-            aria-describedby="filter"
-            v-model="filter"
+            aria-describedby="search"
+            v-model="search"
           />
         </div>
       </div>
       <div class="mt-3 mb-3 mt-md-0 col-md-6 col-12">
-        <select class="form-select" v-model="order">
+        <select class="form-select" v-model="filter">
           <option disabled value="">Выберите фильтр</option>
           <option value="priceUp">По возрастанию цены</option>
           <option value="priceDown">По убыванию цены</option>
@@ -40,7 +40,14 @@
               <li class="page-item" v-if="page != 1">
                 <a class="page-link" @click="page--">Назад</a>
               </li>
-              <li class="page-item" v-for="(pageNumber, id) in pages" :key="id">
+              <li
+                class="page-item"
+                :class="{
+                  active: +page === +pageNumber
+                }"
+                v-for="(pageNumber, id) in pages"
+                :key="id"
+              >
                 <a class="page-link" @click="page = pageNumber">
                   {{ pageNumber }}
                 </a>
@@ -63,7 +70,7 @@ import ProductCard from './ProductCard'
 export default {
   data () {
     return {
-      order: '',
+      search: '',
       filter: '',
       page: 1,
       perPage: 8
@@ -81,7 +88,7 @@ export default {
     },
     filteredProducts () {
       return this.newList.filter(p =>
-        p.name.toLowerCase().includes(this.filter.toLowerCase())
+        p.name.toLowerCase().includes(this.search.toLowerCase())
       )
     },
     startIndex () {
@@ -105,24 +112,30 @@ export default {
     },
     pageStateOptions () {
       return {
-        filter: this.filter,
+        search: this.search,
         page: this.page,
-        order: this.order
+        filter: this.filter
       }
+    },
+    routeQuery () {
+      return this.$route.query
     }
   },
   watch: {
-    pageStateOptions (value) {
+    pageStateOptions () {
       window.history.pushState(
         null,
         document.title,
-        `${window.location.pathname}?filter=${value.filter}&page=${value.page}&order=${value.order}`
+        `${window.location.pathname}?search=${this.search}&page=${this.page}&filter=${this.filter}`
       )
+    },
+    page () {
+      window.scrollTo(0, 0)
     }
   },
   methods: {
     sortProduct (productList) {
-      switch (this.order) {
+      switch (this.filter) {
         case 'priceUp':
           return productList.sort(function (a, b) {
             return parseInt(a.price.replace(' ', '').trim()) >
@@ -166,18 +179,11 @@ export default {
   },
   created () {
     this.$store.dispatch('fetchList', this.$route.params.id)
-
-    const windowData = Object.fromEntries(
-      new URL(window.location).searchParams.entries()
-    )
-
-    const VALID_KEYS = ['filter', 'page', 'order']
-
-    VALID_KEYS.forEach(key => {
-      if (windowData[key]) {
-        this[key] = windowData[key]
-      }
-    })
+    if (this.routeQuery) {
+      this.search = this.routeQuery.search
+      this.page = this.routeQuery.page
+      this.filter = this.routeQuery.filter
+    }
   },
   components: {
     ProductCard
