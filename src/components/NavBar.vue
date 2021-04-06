@@ -14,57 +14,106 @@
         aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        ref="navbarBtn"
       >
         <span class="fas fa-bars"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav flex-fill">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="navbarDropdownMenuLink"
+        <div class="navbar-nav flex-fill">
+          <div class="nav-item col dropdown">
+            <div class="text-center text-lg-start">
+              <button
+                class="dropdown-toggle btn btn-primary"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Каталог
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-light"
+                aria-labelledby="dropdown"
+              >
+                <li
+                  v-for="(link, id) in catalog"
+                  :key="id"
+                  @click="routerLinkHundler2(link)"
+                >
+                  <router-link
+                    :to="'/TechWebShop/catalog/' + link.name"
+                    class="dropdown-item"
+                  >
+                    {{ link.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="nav-item col" v-for="(link, id) in navbar" :key="id">
+            <div @click="routerLinkHundler">
+              <router-link class="nav-link" :to="link.path">
+                <i :class="link.iconClass"></i>
+                <span
+                  class="position-relative"
+                  v-if="totalCountProducts > 0 && link.title === ' Корзина'"
+                  ><span
+                    class="position-absolute shop-card__count-products bg-secondary"
+                    >{{ totalCountProducts }}
+                  </span>
+                  <span class="ms-3"
+                    >{{ (+totalPrice).toLocaleString() }} ₽
+                  </span>
+                </span>
+                <span v-else>{{ link.title }}</span>
+              </router-link>
+            </div>
+          </div>
+          <div class="nav-item col" v-if="!userName">
+            <router-link
+              class="nav-link"
+              to="/TechWebShop/login"
+              @click="routerLinkHundler"
+              ><i class="fas fa-user-circle"></i> Войти</router-link
+            >
+          </div>
+          <div v-else class="nav-item dropdown col text-lg-end">
+            <button
+              class="dropdown-toggle btn btn-primary"
               role="button"
+              id="dropdownUser"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Каталог
-            </a>
+              {{ userName.firstName || 'Аккаунт' }}
+            </button>
             <ul
-              class="dropdown-menu dropdown-menu-light"
-              aria-labelledby="navbarDarkDropdownMenuLink"
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="dropdownUser"
             >
-              <li
-                v-for="(link, id) in catalog"
-                :key="id"
-                @click="$store.commit('setCategories', link.name)"
-              >
-                <router-link
-                  :to="'/TechWebShop/catalog/' + link.name"
-                  class="dropdown-item"
-                >
-                  {{ link.title }}
+              <li @click="routerLinkHundler">
+                <router-link to="/TechWebShop/profile" class="dropdown-item">
+                  Личные данные
                 </router-link>
               </li>
+              <li @click="routerLinkHundler">
+                <router-link
+                  :to="'/TechWebShop/orders/' + $store.getters.getUs._id"
+                  class="dropdown-item"
+                >
+                  Заказы
+                </router-link>
+              </li>
+              <li @click="routerLinkHundler">
+                <button
+                  @click="$store.dispatch('logoutUser')"
+                  class="dropdown-item"
+                >
+                  Выход
+                </button>
+              </li>
             </ul>
-          </li>
-          <li class="nav-item col" v-for="(link, id) in navbar" :key="id">
-            <router-link class="nav-link" :to="link.path">
-              <i :class="link.iconClass"></i>
-              <span
-                class="position-relative"
-                v-if="totalCountProducts > 0 && link.title === ' Корзина'"
-                ><span
-                  class="position-absolute shop-card__count-products bg-secondary"
-                  >{{ totalCountProducts }}
-                </span>
-                <span class="ms-3"
-                  >{{ (+totalPrice).toLocaleString() }} ₽
-                </span>
-              </span>
-              <span v-else>{{ link.title }}</span>
-            </router-link>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
@@ -78,6 +127,9 @@ export default {
     },
     totalPrice () {
       return this.$store.getters.getTotalPrice
+    },
+    userName () {
+      return this.$store.getters.getUs
     }
   },
   data () {
@@ -92,11 +144,6 @@ export default {
           iconClass: 'fas fa-shopping-cart',
           path: '/TechWebShop/orders',
           title: ' Корзина'
-        },
-        {
-          iconClass: 'fas fa-user-circle',
-          path: '/TechWebShop/profile',
-          title: ' Профиль'
         }
       ],
       catalog: [
@@ -113,6 +160,25 @@ export default {
           title: 'Смартфоны'
         }
       ]
+    }
+  },
+  methods: {
+    routerLinkHundler () {
+      if (window.innerWidth < 992) {
+        this.$refs.navbarBtn.click()
+      }
+    },
+    routerLinkHundler2 (link) {
+      if (window.innerWidth < 992) {
+        this.$refs.navbarBtn.click()
+      }
+      localStorage.setItem(
+        'catalog',
+        JSON.stringify({
+          title: link.title,
+          categories: link.name
+        })
+      )
     }
   }
 }
