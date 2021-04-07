@@ -24,11 +24,15 @@ class User {
 
 export default {
   state: {
-    user: null
+    user: null,
+    userOrders: []
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
+    },
+    setUserOrders (state, payload) {
+      state.userOrders.push(payload)
     }
   },
   actions: {
@@ -117,7 +121,8 @@ export default {
             text: error.response.data.error
           })
         })
-    }
+    },
+    async getUserOrders ({ commit }, payload) {}
   },
   getters: {
     getUs (state) {

@@ -12,6 +12,7 @@ import Page404 from '../pages/Page404'
 import Checkout from '../pages/Checkout'
 import Login from '../pages/Login'
 import Registration from '../pages/Registration'
+import UserOrders from '../pages/UserOrders'
 
 import ProductList from '../components/productList/ProductList'
 import ProductInformation from '../components/product/ProductInformation'
@@ -27,6 +28,7 @@ export default new VueRouter({
   routes: [
     {
       path: BASE_URL + '/',
+      name: 'home',
       component: Home
     },
     {
@@ -36,37 +38,50 @@ export default new VueRouter({
     },
     {
       path: BASE_URL + '/contacts',
+      name: 'contacts',
       component: Contacts
     },
     {
       path: BASE_URL + '/orders',
+      name: 'orders',
       component: ShopCard
     },
     {
+      path: BASE_URL + '/orders/:uid',
+      name: 'user orders',
+      component: UserOrders
+    },
+    {
       path: BASE_URL + '/profile',
+      name: 'profile',
       component: Profile,
       beforeEnter: authGuard.profile
     },
     {
       path: BASE_URL + '/checkout',
+      name: 'checkout',
       component: Checkout
     },
     {
       path: BASE_URL + '/login',
+      name: 'login',
       component: Login,
       beforeEnter: authGuard.login
     },
     {
       path: BASE_URL + '/registration',
+      name: 'registation',
       component: Registration,
       beforeEnter: authGuard.login
     },
     {
       path: BASE_URL + '/productList/:id',
+      name: 'productList',
       component: ProductList
     },
     {
       path: BASE_URL + '/product/:idProduct',
+      name: 'product',
       component: ProductInformation,
       children: [
         {
@@ -88,6 +103,7 @@ export default new VueRouter({
     },
     {
       path: BASE_URL + '*',
+      name: '404 page',
       component: Page404
     }
   ],
