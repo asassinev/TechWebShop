@@ -7,12 +7,14 @@
     </div>
     <div class="col-md-10">
       <div class="list__body">
-        <div @click="addProduct">
-          <router-link
+        <div>
+          <div
+            type="button"
+            @click="hundlerClickLink"
             class="list__link text-decoration-none text-dark fw-bold"
-            :to="'/TechWebShop/product/' + product._id + `/description`"
-            >{{ product.name }}</router-link
           >
+            {{ product.name }}
+          </div>
           <p class="mt-2 list__description">{{ product.titleDescription }}</p>
         </div>
         <div class="clearfix">
@@ -32,14 +34,8 @@ export default {
   components: { BuyProductBTN },
   props: ['product'],
   methods: {
-    addProduct () {
-      localStorage.setItem(
-        'product',
-        JSON.stringify({
-          path: this.product._id + '/description',
-          title: this.product.name
-        })
-      )
+    hundlerClickLink () {
+      this.$emit('setProduct', this.product)
     }
   }
 }

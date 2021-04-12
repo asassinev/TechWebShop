@@ -13,8 +13,10 @@ import Checkout from '../pages/Checkout'
 import Login from '../pages/Login'
 import Registration from '../pages/Registration'
 import UserOrders from '../pages/UserOrders'
+import ProductList from '../pages/ProductList'
 
-import ProductList from '../components/productList/ProductList'
+import CategoryList from '../components/catalog/CategoryList'
+import CatalogList from '../components/catalog/CatalogList'
 import ProductInformation from '../components/product/ProductInformation'
 import ProductDescription from '../components/product/ProductDescription'
 import ProductСharacteristics from '../components/product/ProductСharacteristics'
@@ -32,9 +34,20 @@ export default new VueRouter({
       component: Home
     },
     {
-      path: BASE_URL + '/catalog/:name',
-      name: 'catalog',
-      component: Catalog
+      path: BASE_URL + '/catalog',
+      component: Catalog,
+      children: [
+        {
+          path: '',
+          name: 'catalogList',
+          component: CatalogList
+        },
+        {
+          path: ':name',
+          name: 'catalogCategory',
+          component: CategoryList
+        }
+      ]
     },
     {
       path: BASE_URL + '/contacts',
@@ -75,12 +88,12 @@ export default new VueRouter({
       beforeEnter: authGuard.login
     },
     {
-      path: BASE_URL + '/productList/:id',
+      path: BASE_URL + '/:id',
       name: 'productList',
       component: ProductList
     },
     {
-      path: BASE_URL + '/product/:idProduct',
+      path: BASE_URL + '/:idProduct',
       name: 'product',
       component: ProductInformation,
       children: [

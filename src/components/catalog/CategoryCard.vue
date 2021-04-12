@@ -1,16 +1,13 @@
 <template>
   <div @click="addProductListParams">
-    <router-link
-      :to="'/TechWebShop/productList/' + item.id"
-      class="item-card shadow-sm p-3 bg-white rounded user-select-none"
-    >
+    <div class="item-card shadow-sm p-3 bg-white rounded user-select-none">
       <div class="item-card__img">
         <img :src="item.src" :alt="item.title" class="item-card__img-margin" />
       </div>
       <p class="item-card__text fw-bold fs-5 mb-2">
         {{ item.title }}
       </p>
-    </router-link>
+    </div>
   </div>
 </template>
 
@@ -19,19 +16,18 @@ export default {
   props: ['item'],
   methods: {
     addProductListParams () {
-      localStorage.setItem(
-        'productList',
-        JSON.stringify({
-          path: this.item.id,
-          title: this.item.title
-        })
-      )
+      localStorage.setItem('product-list-title', this.item.title)
+      this.$router.push({
+        name: 'productList',
+        params: { id: this.item.id },
+        query: { search: '', page: 1, filter: '' }
+      })
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .item-card {
   display: flex;
   flex-direction: column;

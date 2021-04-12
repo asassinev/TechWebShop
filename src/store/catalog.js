@@ -2,11 +2,15 @@ import axios from './optionsAxois'
 export default {
   state: {
     catalog: [],
+    catalogCategory: '',
     productListTitle: ''
   },
   mutations: {
     setCatalog (state, payload) {
       state.catalog = payload
+    },
+    setCatalogCategory (state, payload) {
+      state.catalogCategory = payload
     },
     setProductListTitle (state, payload) {
       state.productListTitle = payload
@@ -30,11 +34,11 @@ export default {
     getCatalog (state) {
       return state.catalog
     },
-    getCatalogCategory (state) {
-      return state.catalog.categories
-    },
     getProductListTitle (state) {
       return state.productListTitle
+    },
+    getCatalogCategory (state) {
+      return state.catalogCategory
     }
   }
 }

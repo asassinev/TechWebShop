@@ -20,35 +20,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav flex-fill">
-          <div class="nav-item col dropdown">
-            <div class="text-center text-lg-start">
-              <button
-                class="dropdown-toggle btn btn-primary"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Каталог
-              </button>
-              <ul
-                class="dropdown-menu dropdown-menu-light"
-                aria-labelledby="dropdown"
-              >
-                <li
-                  v-for="(link, id) in catalog"
-                  :key="id"
-                  @click="routerLinkHundler2(link)"
-                >
-                  <router-link
-                    :to="'/TechWebShop/catalog/' + link.name"
-                    class="dropdown-item"
-                  >
-                    {{ link.title }}
-                  </router-link>
-                </li>
-              </ul>
-            </div>
-          </div>
           <div class="nav-item col" v-for="(link, id) in navbar" :key="id">
             <div @click="routerLinkHundler">
               <router-link class="nav-link" :to="link.path">
@@ -136,6 +107,11 @@ export default {
     return {
       navbar: [
         {
+          iconClass: 'fas fa-stream',
+          path: '/TechWebShop/catalog',
+          title: ' Каталог'
+        },
+        {
           iconClass: 'fas fa-phone-square-alt',
           path: '/TechWebShop/contacts',
           title: ' Контакты'
@@ -167,18 +143,6 @@ export default {
       if (window.innerWidth < 992) {
         this.$refs.navbarBtn.click()
       }
-    },
-    routerLinkHundler2 (link) {
-      if (window.innerWidth < 992) {
-        this.$refs.navbarBtn.click()
-      }
-      localStorage.setItem(
-        'catalog',
-        JSON.stringify({
-          title: link.title,
-          categories: link.name
-        })
-      )
     }
   }
 }

@@ -4,14 +4,13 @@
       <ol class="breadcrumb">
         <li
           class="breadcrumb-item"
-          v-for="(item, id) in breadcrumb"
-          :key="id"
+          v-for="(item, idx) in breadcrumb"
+          :key="idx"
           :class="{ active: isActive(item.path) }"
+          @click="$store.dispatch('updateBreadcrumb', $route.name)"
         >
           <span v-if="isActive(item.path)">{{ item.title }}</span>
-          <router-link v-else :to="'/TechwebShop/' + item.path">{{
-            item.title
-          }}</router-link>
+          <router-link v-else :to="item.path">{{ item.title }}</router-link>
         </li>
       </ol>
     </nav>
@@ -23,78 +22,116 @@
 export default {
   data () {
     return {
-      lastPath: ''
-    }
-  },
-  created () {
-    if (localStorage.getItem('breadcrumb')) {
-      this.$store.commit(
-        'prevBreadcrumb',
-        JSON.parse(localStorage.getItem('breadcrumb'))
-      )
+      lastPath: '',
+      breadcrumbList: [],
+      prevPage: ''
     }
   },
   computed: {
     breadcrumb () {
       return this.$store.getters.getBreadcrumb
     },
-    location () {
-      return this.$route.name
+    productListTitle () {
+      return this.$store.getters.getProductListTitle
     },
-    catalog () {
-      return JSON.parse(localStorage.getItem('catalog'))
-    },
-    productList () {
-      return JSON.parse(localStorage.getItem('productList'))
-    },
-    product () {
-      return JSON.parse(localStorage.getItem('product'))
+    productName () {
+      return this.$store.getters.getBProductName
     }
   },
   watch: {
     breadcrumb () {
       this.lastPath = this.breadcrumb[this.breadcrumb.length - 1].path
     },
-    location () {
-      var newLocation = this.location
-      if (
-        newLocation !== 'description' &&
-        newLocation !== 'productList' &&
-        newLocation !== 'catalog'
+    $route () {
+      console.log(this.$route)
+      if (this.$route.name === 'catalogList') {
+        this.$store.commit('setBCatalog', {
+          path: this.$route.fullPath,
+          title: 'Каталог',
+          name: 'catalog'
+        })
+      } else if (this.$route.name === 'catalogCategory') {
+        if (this.$route.meta.category === undefined) {
+          this.$store.commit('setBCategory', {
+            path: this.$route.fullPath,
+            title:
+              this.$store.getters.getBCategory.title ||
+              this.$store.getters.getProductListTitle,
+            name: this.$route.name
+          })
+        } else {
+          this.$store.commit('setBCategory', {
+            path: this.$route.fullPath,
+            title: this.$route.meta.category,
+            name: this.$route.name
+          })
+        }
+      } else if (this.$route.name === 'productList') {
+        this.$store.commit(
+          'setProductListTitle',
+          localStorage.getItem('product-list-title')
+        )
+        if (this.$route.meta.productListTitle === undefined) {
+          this.$store.commit('setBProductList', {
+            path: this.$route.fullPath,
+            title: this.$store.getters.getBProductList.title,
+            name: this.$route.name
+          })
+        } else {
+          this.$store.commit('setBProductList', {
+            path: this.$route.fullPath,
+            title: this.$route.meta.productListTitle,
+            name: this.$route.name
+          })
+        }
+      } else if (
+        this.$route.name === 'description' ||
+        this.$route.name === 'reviews' ||
+        this.$route.name === 'characteristics'
       ) {
-        this.$store.commit('newBreadcrumb', [])
-        localStorage.removeItem('breadcrumb')
-      } else {
-        if (newLocation === 'catalog') {
-          this.$store.commit('newBreadcrumb', {
-            path: 'catalog/' + this.catalog.categories + '/',
-            title: this.catalog.title
+        if (this.$route.meta.productName === undefined) {
+          this.$store.commit('setBProduct', {
+            path: this.$route.fullPath,
+            title: this.$store.getters.getBProduct.title,
+            name: this.$route.name
           })
-        } else if (newLocation === 'productList') {
-          this.$store.commit('newBreadcrumb', {
-            path: 'catalog/' + this.catalog.categories + '/',
-            title: this.catalog.title
-          })
-          this.$store.commit('addBreadcrumb', {
-            path: 'productList/' + this.productList.path,
-            title: this.productList.title
-          })
-        } else if (newLocation === 'description') {
-          this.$store.commit('newBreadcrumb', {
-            path: 'catalog/' + this.catalog.categories + '/',
-            title: this.catalog.title
-          })
-          this.$store.commit('addBreadcrumb', {
-            path: 'productList/' + this.productList.path,
-            title: this.productList.title
-          })
-          this.$store.commit('addBreadcrumb', {
-            path: 'product/' + this.product.path,
-            title: this.product.title
+        } else {
+          this.$store.commit('setBProduct', {
+            path: this.$route.fullPath,
+            title: this.$route.meta.productName,
+            name: this.$route.name
           })
         }
       }
+      this.$store.dispatch('updateBreadcrumb', this.$route.name)
     }
+  },
+  created () {
+    if (this.$store.getters.getBCatalog === null) {
+      this.$store.commit(
+        'setBCatalog',
+        JSON.parse(localStorage.getItem('breadcrumb-catalog'))
+      )
+    }
+    if (this.$store.getters.getBCategory === null) {
+      this.$store.commit(
+        'setBCategory',
+        JSON.parse(localStorage.getItem('breadcrumb-category'))
+      )
+    }
+    if (this.$store.getters.getBProductList === null) {
+      this.$store.commit(
+        'setBProductList',
+        JSON.parse(localStorage.getItem('breadcrumb-product-list'))
+      )
+    }
+    if (this.$store.getters.getBProduct === null) {
+      this.$store.commit(
+        'setBProduct',
+        JSON.parse(localStorage.getItem('breadcrumb-product'))
+      )
+    }
+    this.lastPath = this.breadcrumb[this.breadcrumb.length - 1].path
   },
   methods: {
     isActive (path) {

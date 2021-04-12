@@ -31,7 +31,10 @@
           </div>
           <div class="list">
             <div v-for="(product, id) in paginatedProducts" :key="id">
-              <ProductCard :product="product" />
+              <ProductCard
+                @setProduct="setCurrentProductName($event)"
+                :product="product"
+              />
             </div>
           </div>
 
@@ -66,14 +69,15 @@
 </template>
 
 <script>
-import ProductCard from './ProductCard'
+import ProductCard from '../components/productList/ProductCard'
 export default {
   data () {
     return {
       search: '',
       filter: '',
       page: 1,
-      perPage: 8
+      perPage: 8,
+      currentProductName: ''
     }
   },
   computed: {
@@ -175,6 +179,14 @@ export default {
         default:
           return productList
       }
+    },
+    setCurrentProductName (product) {
+      console.log(this.currentProductName)
+      this.currentProductName = product.name
+      this.$router.push({
+        name: 'description',
+        params: { idProduct: product._id }
+      })
     }
   },
   created () {
@@ -187,6 +199,10 @@ export default {
   },
   components: {
     ProductCard
+  },
+  beforeRouteLeave (to, from, next) {
+    to.meta.productName = this.currentProductName
+    next()
   }
 }
 </script>
